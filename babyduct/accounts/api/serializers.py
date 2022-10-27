@@ -6,7 +6,7 @@ from accounts.models import Customer_Profile
 class CreateUserSerializer(serializers.ModelSerializer):
     class Meta:
         model = User
-        fields = '__all__'
+        fields = ["username", "email", "password", "password2"]
 
 
 class CustomerProfileSerializers(serializers.ModelSerializer):
