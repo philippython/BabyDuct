@@ -1,4 +1,4 @@
-<mxfile host="app.diagrams.net" modified="2022-11-02T19:35:11.886Z" agent="5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/106.0.0.0 Safari/537.36" etag="7ZXo3Bzz1P9b2rbSpDVZ" version="20.5.1" type="github" pages="2">
+<mxfile host="app.diagrams.net" modified="2022-11-02T19:53:45.938Z" agent="5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/106.0.0.0 Safari/537.36" etag="treQupffDvWqkIJs67xd" version="20.5.1" type="github" pages="2">
   <diagram id="Eq0FG51dICM4thIJgTwr" name="Page-1">
     <mxGraphModel dx="1888" dy="547" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="850" pageHeight="1100" math="0" shadow="0">
       <root>
@@ -80,7 +80,7 @@
     </mxGraphModel>
   </diagram>
   <diagram id="2m2Ggozt6w66g1cqgT1x" name="Page-2">
-    <mxGraphModel dx="716" dy="377" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="850" pageHeight="1100" math="0" shadow="0">
+    <mxGraphModel dx="830" dy="438" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="850" pageHeight="1100" math="0" shadow="0">
       <root>
         <mxCell id="0" />
         <mxCell id="1" parent="0" />
@@ -163,6 +163,43 @@
             <Array as="points">
               <mxPoint x="640" y="120" />
             </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="2EzOOoveKG2D-emArDFg-35" value="" style="rounded=0;whiteSpace=wrap;html=1;direction=south;" vertex="1" parent="1">
+          <mxGeometry x="65" y="380" width="120" height="250" as="geometry" />
+        </mxCell>
+        <mxCell id="2EzOOoveKG2D-emArDFg-37" value="" style="sketch=0;points=[[0,0,0],[0.25,0,0],[0.5,0,0],[0.75,0,0],[1,0,0],[0,1,0],[0.25,1,0],[0.5,1,0],[0.75,1,0],[1,1,0],[0,0.25,0],[0,0.5,0],[0,0.75,0],[1,0.25,0],[1,0.5,0],[1,0.75,0]];points=[[0,0,0],[0.25,0,0],[0.5,0,0],[0.75,0,0],[1,0,0],[0,1,0],[0.25,1,0],[0.5,1,0],[0.75,1,0],[1,1,0],[0,0.25,0],[0,0.5,0],[0,0.75,0],[1,0.25,0],[1,0.5,0],[1,0.75,0]];outlineConnect=0;fontColor=#232F3E;gradientColor=#F34482;gradientDirection=north;fillColor=#BC1356;strokeColor=#ffffff;dashed=0;verticalLabelPosition=bottom;verticalAlign=top;align=center;html=1;fontSize=12;fontStyle=0;aspect=fixed;shape=mxgraph.aws4.resourceIcon;resIcon=mxgraph.aws4.app_config;" vertex="1" parent="1">
+          <mxGeometry x="91" y="510" width="70" height="70" as="geometry" />
+        </mxCell>
+        <mxCell id="2EzOOoveKG2D-emArDFg-38" value="" style="shape=image;html=1;verticalAlign=top;verticalLabelPosition=bottom;labelBackgroundColor=#ffffff;imageAspect=0;aspect=fixed;image=https://cdn1.iconfinder.com/data/icons/ionicons-fill-vol-2/512/logo-python-128.png" vertex="1" parent="1">
+          <mxGeometry x="86" y="420" width="78" height="78" as="geometry" />
+        </mxCell>
+        <mxCell id="2EzOOoveKG2D-emArDFg-39" value="Cart service" style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];autosize=1;strokeColor=none;fillColor=none;" vertex="1" parent="1">
+          <mxGeometry x="75" y="345" width="90" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="2EzOOoveKG2D-emArDFg-40" value="Flask REST server&lt;br&gt;" style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];autosize=1;strokeColor=none;fillColor=none;" vertex="1" parent="1">
+          <mxGeometry x="66" y="390" width="120" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="2EzOOoveKG2D-emArDFg-41" value="" style="endArrow=classic;startArrow=classic;html=1;rounded=0;" edge="1" parent="1">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="196" y="610" as="sourcePoint" />
+            <mxPoint x="186" y="680" as="targetPoint" />
+            <Array as="points">
+              <mxPoint x="236" y="610" />
+              <mxPoint x="236" y="680" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="2EzOOoveKG2D-emArDFg-42" value="" style="shape=cylinder3;whiteSpace=wrap;html=1;boundedLbl=1;backgroundOutline=1;size=15;" vertex="1" parent="1">
+          <mxGeometry x="110" y="650" width="60" height="80" as="geometry" />
+        </mxCell>
+        <mxCell id="2EzOOoveKG2D-emArDFg-43" value="PostgreSQL&lt;br style=&quot;font-size: 9px;&quot;&gt;&amp;nbsp;Database" style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];autosize=1;strokeColor=none;fillColor=none;fontSize=9;" vertex="1" parent="1">
+          <mxGeometry x="105" y="680" width="70" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="2EzOOoveKG2D-emArDFg-45" value="" style="endArrow=classic;html=1;rounded=0;fontSize=9;" edge="1" parent="1">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="230" y="440" as="sourcePoint" />
+            <mxPoint x="320" y="310" as="targetPoint" />
           </mxGeometry>
         </mxCell>
       </root>
