@@ -1,4 +1,4 @@
-<mxfile host="app.diagrams.net" modified="2022-11-10T01:04:16.978Z" agent="5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/106.0.0.0 Safari/537.36" etag="6gfQUEEjPxUoh2F3zRjA" version="20.5.1" type="github" pages="3">
+<mxfile host="app.diagrams.net" modified="2022-11-10T01:18:15.685Z" agent="5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/106.0.0.0 Safari/537.36" etag="Q-Mxkf99W4_qf8-5AILI" version="20.5.1" type="github" pages="3">
   <diagram id="Eq0FG51dICM4thIJgTwr" name="Page-1">
     <mxGraphModel dx="1888" dy="547" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="850" pageHeight="1100" math="0" shadow="0">
       <root>
@@ -400,6 +400,56 @@
         </mxCell>
         <mxCell id="U79oaBKDRRmQF3NleXah-9" value="Cart Page" style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];autosize=1;strokeColor=none;fillColor=none;" vertex="1" parent="1">
           <mxGeometry x="460" y="-300" width="80" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="U79oaBKDRRmQF3NleXah-10" value="" style="endArrow=classic;html=1;rounded=0;" edge="1" parent="1">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="750" y="160" as="sourcePoint" />
+            <mxPoint x="830" y="170" as="targetPoint" />
+            <Array as="points">
+              <mxPoint x="820" y="160" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="U79oaBKDRRmQF3NleXah-13" value="" style="image;html=1;image=img/lib/clip_art/computers/Server_128x128.png" vertex="1" parent="1">
+          <mxGeometry x="850" y="128" width="80" height="80" as="geometry" />
+        </mxCell>
+        <mxCell id="U79oaBKDRRmQF3NleXah-15" value="Messaging Service" style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];autosize=1;strokeColor=none;fillColor=none;" vertex="1" parent="1">
+          <mxGeometry x="830" y="90" width="120" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="U79oaBKDRRmQF3NleXah-16" value="" style="endArrow=classic;html=1;rounded=0;" edge="1" parent="1">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="890" y="210" as="sourcePoint" />
+            <mxPoint x="890" y="270" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="U79oaBKDRRmQF3NleXah-17" value="" style="outlineConnect=0;dashed=0;verticalLabelPosition=bottom;verticalAlign=top;align=center;html=1;shape=mxgraph.aws3.api_gateway;fillColor=#D9A741;gradientColor=none;" vertex="1" parent="1">
+          <mxGeometry x="850" y="300" width="76.5" height="93" as="geometry" />
+        </mxCell>
+        <mxCell id="U79oaBKDRRmQF3NleXah-19" value="Messaging API Endpoint" style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];autosize=1;strokeColor=none;fillColor=none;" vertex="1" parent="1">
+          <mxGeometry x="830" y="270" width="150" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="U79oaBKDRRmQF3NleXah-21" value="" style="html=1;verticalLabelPosition=bottom;align=center;labelBackgroundColor=#ffffff;verticalAlign=top;strokeWidth=2;strokeColor=#0080F0;shadow=0;dashed=0;shape=mxgraph.ios7.icons.envelope_(message);" vertex="1" parent="1">
+          <mxGeometry x="700" y="316.5" width="50" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="U79oaBKDRRmQF3NleXah-22" value="" style="endArrow=classic;html=1;rounded=0;" edge="1" parent="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="420" y="190" as="sourcePoint" />
+            <mxPoint x="520" y="190" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="U79oaBKDRRmQF3NleXah-23" value="" style="shape=message;html=1;outlineConnect=0;" vertex="1" parent="U79oaBKDRRmQF3NleXah-22">
+          <mxGeometry width="20" height="14" relative="1" as="geometry">
+            <mxPoint x="-10" y="-7" as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="U79oaBKDRRmQF3NleXah-24" value="" style="endArrow=classic;html=1;rounded=0;" edge="1" parent="1">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="820" y="350" as="sourcePoint" />
+            <mxPoint x="770" y="350" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="U79oaBKDRRmQF3NleXah-25" value="Messaging Page" style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];autosize=1;strokeColor=none;fillColor=none;" vertex="1" parent="1">
+          <mxGeometry x="670" y="286.5" width="110" height="30" as="geometry" />
         </mxCell>
       </root>
     </mxGraphModel>
