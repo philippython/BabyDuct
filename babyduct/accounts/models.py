@@ -1,3 +1,4 @@
+from distutils.command.upload import upload
 from django.db import models
 from django.contrib.auth.models import User
 
@@ -12,10 +13,11 @@ class Customer_Profile(models.Model):
     ]
 
     user = models.OneToOneField(User, on_delete=models.CASCADE)
-    profile_image  =  models.ImageField(null=True, max_length=100)
+    profile_image  =  models.ImageField(null=True, max_length=100, upload_to='consumer')
     gender = models.CharField(max_length=6, choices=GENDER_CHOICES)
-    age = models.IntegerField()
     contact_no = models.CharField(max_length=11)
+    age = models.IntegerField()
+
 
 
     def __str__(self):
