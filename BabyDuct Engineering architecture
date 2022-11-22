@@ -1,4 +1,4 @@
-<mxfile host="app.diagrams.net" modified="2022-11-21T21:00:49.207Z" agent="5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/107.0.0.0 Safari/537.36" etag="LWf08QFYf2HPVmEyk_Je" version="20.5.3" type="github" pages="5">
+<mxfile host="app.diagrams.net" modified="2022-11-22T17:51:29.733Z" agent="5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/107.0.0.0 Safari/537.36" etag="-60uOBPiZE0mPlwKrh1m" version="20.5.3" type="github" pages="5">
   <diagram id="Eq0FG51dICM4thIJgTwr" name="Page-1">
     <mxGraphModel dx="1888" dy="547" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="850" pageHeight="1100" math="0" shadow="0">
       <root>
@@ -455,7 +455,7 @@
     </mxGraphModel>
   </diagram>
   <diagram id="WiI1jZwtxJsGBw-ZogS8" name="Page-4">
-    <mxGraphModel dx="1038" dy="547" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="850" pageHeight="1100" math="0" shadow="0">
+    <mxGraphModel dx="1888" dy="547" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="850" pageHeight="1100" math="0" shadow="0">
       <root>
         <mxCell id="0" />
         <mxCell id="1" parent="0" />
@@ -607,6 +607,12 @@
         <mxCell id="VMXYql2bRCf1dCddY28A-2" value="SQL Database" style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];autosize=1;strokeColor=none;fillColor=none;fontSize=23;" parent="1" vertex="1">
           <mxGeometry x="305" y="890" width="170" height="40" as="geometry" />
         </mxCell>
+        <mxCell id="vA0xC0SAYVk1pC0oqzJp-1" value="&lt;font style=&quot;font-size: 15px;&quot;&gt;Account Service Url Patterns&lt;/font&gt;" style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];autosize=1;strokeColor=none;fillColor=none;" vertex="1" parent="1">
+          <mxGeometry x="-130" y="1110" width="220" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="vA0xC0SAYVk1pC0oqzJp-2" value="&lt;font style=&quot;font-size: 16px;&quot;&gt;/register - Register New User&amp;nbsp;&lt;br&gt;/authtoken - Acquire Token for authorization&lt;br&gt;/login - Login into website&lt;br&gt;/consumer/profile/id - View consumer Profile&lt;br&gt;/consumer/all - View all users (n.b admin only can access this route)&lt;br&gt;/consumer/id/update - Update consumer Profile&lt;br&gt;/consumer/id/delete - Deletes Consumer Profile&lt;br&gt;&lt;/font&gt;" style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];autosize=1;strokeColor=none;fillColor=none;fontSize=14;" vertex="1" parent="1">
+          <mxGeometry x="-275" y="1140" width="510" height="150" as="geometry" />
+        </mxCell>
       </root>
     </mxGraphModel>
   </diagram>
@@ -615,7 +621,7 @@
       <root>
         <mxCell id="0" />
         <mxCell id="1" parent="0" />
-        <mxCell id="yB-XCCOd6WfyZnIXptXQ-1" value="&lt;font style=&quot;font-size: 19px;&quot;&gt;Inventory Service&lt;/font&gt;" style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];autosize=1;strokeColor=none;fillColor=none;" vertex="1" parent="1">
+        <mxCell id="yB-XCCOd6WfyZnIXptXQ-1" value="&lt;font style=&quot;font-size: 19px;&quot;&gt;Inventory Service&lt;/font&gt;" style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];autosize=1;strokeColor=none;fillColor=none;" parent="1" vertex="1">
           <mxGeometry x="340" y="100" width="170" height="40" as="geometry" />
         </mxCell>
       </root>
