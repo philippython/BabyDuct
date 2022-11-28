@@ -7,12 +7,7 @@ from rest_framework.generics import CreateAPIView
 class RegisterView(CreateAPIView):
     serializer_class = CreateUserSerializer
 
-    # def get_queryset(self, request):
-    #     if request.method == 'POST':
-    #         user = User.object.get(username=request.username)
-    #         if user :
-    #             return ValidationError("User already exists", 400)
-    #         return []
+  
             
 class CreateCustomerProfileView(CreateAPIView):
     serializer_class = CustomerProfileSerializers
