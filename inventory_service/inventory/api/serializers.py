@@ -1,15 +1,22 @@
 from rest_framework import serializers
-from inventory.models import Product, Review
+from inventory.models import Product, Review, ProductsImage
 
-class ProductSerializers(serializers.ModelSerializer):
-    reviews = serializers.StringRelatedField(many=True, read_only=True)
-    images = serializers.ListField(child=serializers.ImageField(allow_empty_file=False, use_url="products"))
-
-    class Meta:
-        model = Product
-        fields = ["name","description", "category", "price", "date", "images", "reviews"]
 
 class ReviewSerializers(serializers.ModelSerializer):
     class Meta:
         model = Review 
+        exclude = ["slug"]
+
+
+class ProductsImageSerializers(serializers.ModelSerializer):
+    class Meta:
+        model = ProductsImage
         fields = "__all__"
+
+class ProductSerializers(serializers.ModelSerializer):
+    reviews = ReviewSerializers(many=True, read_only=True)
+    images =  ProductsImageSerializers(many=True, read_only=True)
+
+    class Meta:
+        model = Product
+        exclude = ["slug"]
