@@ -1,6 +1,6 @@
-from math import prod
-from rest_framework.generics import ListCreateAPIView, CreateAPIView
-from inventory.models import Product
+from rest_framework.generics import APIView, ListCreateAPIView, CreateAPIView
+from rest_framework.response import Response
+from inventory.models import Product, ProductsImage
 from inventory.api.serializers import ProductSerializers, ReviewSerializers, ProductsImageSerializers
 
 class ProductCreateView(ListCreateAPIView):
@@ -10,5 +10,13 @@ class ProductCreateView(ListCreateAPIView):
 class ReviewCreateView(CreateAPIView):
     serializer_class = ReviewSerializers
 
-class ProductsImageCreateView(CreateAPIView):
-    serializer_class = ProductsImageSerializers
+class ProductsImageCreateView(APIView):
+
+    def get(self, request):
+        images = ProductsImage.objects.all()
+        serializer = ProductsImageSerializers(images, many=True)
+        return Response(serializer.data)
+
+    def post(self, request, *args, **kwargs):
+        
+    
