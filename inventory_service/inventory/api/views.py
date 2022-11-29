@@ -16,7 +16,6 @@ class ReviewCreateView(CreateAPIView):
 class ProductsImageCreateView(APIView):
     serializer_class = ProductsImageSerializers
     parser_class = [MultiPartParser, FormParser]
-    # queryset = ProductsImage.objects.all()
 
     def post(self, request):
         product = Product.objects.get(id=request.data["product"])
@@ -25,25 +24,17 @@ class ProductsImageCreateView(APIView):
         images = request.FILES.getlist("image")
         if images :
             request.data.pop("image")
-
             uploaded_images = []
             for image in images:
                 uploaded_images.append(ProductsImage.objects.create(product=product, image=image))
             
-            request.data["image"] = [img.image for img in uploaded_images]
-            # {
-            #     [
-            #      "id" : 1
-            #      "images" : [12, 13, 14]
-            #     ]
-            # }
-            print(request.data)
             serializer = ProductsImageSerializers(data=request.data, many=True)
             if serializer.is_valid():
+                serializer.data["image"] = [img.image for img in uploaded_images]
                 serializer.save()
-                return Response(serializer.data)
+                return Response(serializer.data, status=201)
             else :
-                return Response(serializer.errors)
+                return Response(serializer.errors, status=400)
         else:
             _serializer = ProductsImageSerializers(data=request.data)
             if _serializer.is_valid():
