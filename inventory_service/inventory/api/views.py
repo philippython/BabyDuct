@@ -30,11 +30,11 @@ class ProductsImageCreateView(APIView):
             for image in images:
                 uploaded_images.append(ProductsImage.objects.create(product=product, image=image))
             
-            request.data["image"] = [img.image for img in uploaded_images]
+        
             serializer = ProductsImageSerializers(data=request.data, many=True)
             if serializer.is_valid():
                 serializer.save()
-                return Response(serializer.data)
+                return Response({"Images uploading successful"})
             else :
                 return Response(serializer.errors)
         else:
