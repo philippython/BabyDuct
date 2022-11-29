@@ -30,13 +30,18 @@ class ProductsImageCreateView(APIView):
             for image in images:
                 uploaded_images.append(ProductsImage.objects.create(product=product, image=image))
             
-            data = {}
-            data["id"] = request.data["product"]
-            data["image"] = [img.id for img in uploaded_images]
-            serializer = ProductsImageSerializers(data=data, many=True)
+            request.data["image"] = [img.image for img in uploaded_images]
+            # {
+            #     [
+            #      "id" : 1
+            #      "images" : [12, 13, 14]
+            #     ]
+            # }
+            print(request.data)
+            serializer = ProductsImageSerializers(data=request.data, many=True)
             if serializer.is_valid():
                 serializer.save()
-                return Response(list(serializer.data))
+                return Response(serializer.data)
             else :
                 return Response(serializer.errors)
         else:
