@@ -1,4 +1,3 @@
-from email.policy import default
 from django.db import models
 from django.utils.text import slugify
 from django.core.validators import MinValueValidator, MaxValueValidator
@@ -23,7 +22,7 @@ class Review(models.Model):
     product = models.ForeignKey(Product, on_delete=models.CASCADE, related_name='reviews')
     slug = models.CharField(max_length=80, blank=False, null=False, default=product.name)
     rating = models.IntegerField(validators=[MinValueValidator(0), MaxValueValidator(5)])
-    review = models.CharField(max_length=255)
+    review = models.TextField(max_length=255)
     date = models.DateField(auto_now_add=True)
 
     def save(self, *args, **kwargs):
