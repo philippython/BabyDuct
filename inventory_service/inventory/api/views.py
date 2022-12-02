@@ -6,9 +6,11 @@ from inventory.models import Product, ProductsImage
 from inventory.api.serializers import ProductSerializers, ReviewSerializers, ProductsImageSerializers
 
 class ProductCreateView(CreateAPIView):
-    queryset = Product.objects.all()
     parser_class = [MultiPartParser, FormParser]
     serializer_class = ProductSerializers
+
+class ProductListView(ListCreateAPIView):
+    queryset = Product.objects.all()
 
 class ReviewCreateView(CreateAPIView):
     serializer_class = ReviewSerializers
