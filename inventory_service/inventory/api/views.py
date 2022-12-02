@@ -1,5 +1,4 @@
 from rest_framework.generics import ListCreateAPIView, CreateAPIView
-from rest_framework.response import Response
 from rest_framework.views import APIView
 from rest_framework.parsers import MultiPartParser, FormParser
 from inventory.models import Product, ProductsImage

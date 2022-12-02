@@ -25,7 +25,7 @@ class ProductSerializers(serializers.ModelSerializer):
 
     class Meta:
         model = Product
-        fields = ["id", "name", "description", "category", "price", "date", "images", "reviews", "uploaded_images"]
+        fields = ["id", "name","url", "description", "category", "price", "date", "images", "reviews", "uploaded_images"]
 
     def create(self, validated_data):
         uploaded_images = validated_data.pop("uploaded_images")
