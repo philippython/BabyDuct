@@ -13,7 +13,7 @@ class Product(models.Model):
     date = models.DateField(auto_now_add=True)
 
     def get_absolute_url(self):
-        return reverse('people-detail', kwargs={'pk' : self.pk})
+        return reverse('single-product', kwargs={'slug' : self.slug})
 
 
     def save(self, *args, **kwargs):
