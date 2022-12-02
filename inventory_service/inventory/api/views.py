@@ -4,7 +4,6 @@ from rest_framework.views import APIView
 from rest_framework.parsers import MultiPartParser, FormParser
 from inventory.models import Product, ProductsImage
 from inventory.api.serializers import ProductSerializers, ReviewSerializers, ProductsImageSerializers
-from .helper import image_input_saver
 
 class ProductCreateView(CreateAPIView):
     queryset = Product.objects.all()

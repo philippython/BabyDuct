@@ -23,7 +23,7 @@ class Review(models.Model):
     slug = models.CharField(max_length=80, blank=False, null=False, default=product.name)
     rating = models.IntegerField(validators=[MinValueValidator(0), MaxValueValidator(5)])
     review = models.TextField(max_length=255)
-    date = models.DateField(auto_now_add=True)
+    date = models.DateField(auto_now=True)
 
     def save(self, *args, **kwargs):
         self.slug = slugify(self.product.name)

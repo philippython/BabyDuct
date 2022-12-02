@@ -14,6 +14,8 @@ class ProductsImageSerializers(serializers.ModelSerializer):
         fields = "__all__"
 
 class ProductSerializers(serializers.ModelSerializer):
+    
+    url = serializers.CharField(source='get_absolute_url', read_only=True)
     reviews = ReviewSerializers(many=True, read_only=True)
     images =  ProductsImageSerializers(many=True, read_only=True)
     uploaded_images = serializers.ListField(
