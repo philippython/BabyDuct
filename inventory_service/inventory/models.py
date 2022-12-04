@@ -1,5 +1,6 @@
 from django.db import models
 from django.utils.text import slugify
+from django.urls import reverse
 from django.core.validators import MinValueValidator, MaxValueValidator
 
 # Create your models here.
@@ -10,6 +11,10 @@ class Product(models.Model):
     category = models.CharField(max_length=9, choices=[("toys", "toys"), ("foods", "foods"), ("cosmetics", "cosmetics"), ("fashion", "fashion")])
     price = models.DecimalField(max_digits=7, decimal_places=2)
     date = models.DateField(auto_now_add=True)
+
+    def get_absolute_url(self):
+        return reverse('single-product', kwargs={'slug' : self.slug})
+
 
     def save(self, *args, **kwargs):
         self.slug = slugify(self.name)
@@ -23,7 +28,7 @@ class Review(models.Model):
     slug = models.CharField(max_length=80, blank=False, null=False, default=product.name)
     rating = models.IntegerField(validators=[MinValueValidator(0), MaxValueValidator(5)])
     review = models.TextField(max_length=255)
-    date = models.DateField(auto_now_add=True)
+    date = models.DateField(auto_now=True)
 
     def save(self, *args, **kwargs):
         self.slug = slugify(self.product.name)
