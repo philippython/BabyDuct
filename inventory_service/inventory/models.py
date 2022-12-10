@@ -15,7 +15,6 @@ class Product(models.Model):
     def get_absolute_url(self):
         return reverse('single-product', kwargs={'slug' : self.slug})
 
-
     def save(self, *args, **kwargs):
         self.slug = slugify(self.name)
         super().save(*args, **kwargs)
@@ -25,10 +24,14 @@ class Product(models.Model):
 
 class Review(models.Model):
     product = models.ForeignKey(Product, on_delete=models.CASCADE, related_name='reviews')
-    slug = models.CharField(max_length=80, blank=False, null=False, default=product.name)
+    slug = models.CharField(max_length=80, blank=False, null=False)
     rating = models.IntegerField(validators=[MinValueValidator(0), MaxValueValidator(5)])
     review = models.TextField(max_length=255)
     date = models.DateField(auto_now=True)
+
+
+    def get_absoute_url(self):
+        return  "/inventory/product/reviews/%s" % (self.slug)
 
     def save(self, *args, **kwargs):
         self.slug = slugify(self.product.name)
