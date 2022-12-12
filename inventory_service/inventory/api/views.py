@@ -2,6 +2,7 @@ from rest_framework.generics import RetrieveAPIView, ListCreateAPIView, CreateAP
 from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework.parsers import MultiPartParser, FormParser
+from django.shortcuts import get_object_or_404
 from inventory.models import Product
 from inventory.api.serializers import ProductSerializers, ReviewSerializers, ProductsImageSerializers
 
@@ -17,11 +18,9 @@ class ProductDetailView(RetrieveAPIView):
     serializer_class = ProductSerializers
 
     def get(self, request, slug):
-        product = Product.objects.get(slug=slug)
-        if product:
-            serializer = ProductSerializers(product)
-            return Response(serializer.data, 200)
-        return Response({"error": "Product does not exist"}, 404)
+        product = get_object_or_404(Product, slug=slug)
+        serializer = ProductSerializers(product)
+        return Response(serializer.data, 200)
 
 
 class ReviewCreateView(CreateAPIView):
