@@ -18,8 +18,11 @@ class ProductDetailView(RetrieveAPIView):
 
     def get(self, request, slug):
         product = Product.objects.get(slug=slug)
-        serializer = ProductSerializers(product)
-        return Response(serializer.data, 200)
+        if product:
+            serializer = ProductSerializers(product)
+            return Response(serializer.data, 200)
+        return Response({"error": "Product does not exist"}, 404)
+
 
 class ReviewCreateView(CreateAPIView):
     serializer_class = ReviewSerializers
