@@ -28,7 +28,9 @@ class ProductUpdateView(UpdateAPIView):
 
 class ProductDeleteView(DestroyAPIView):
     serializer_class = ProductSerializers
-
+    lookup_field = "slug"
+    queryset = Product.objects.get(lookup_field)
+    
 class ReviewCreateView(CreateAPIView):
     serializer_class = ReviewSerializers
 
