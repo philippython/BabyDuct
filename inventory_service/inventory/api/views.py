@@ -23,6 +23,7 @@ class ProductDetailView(RetrieveAPIView):
         return Response(serializer.data, 200)
 
 class ProductUpdateView(UpdateAPIView):
+    parser_class = [MultiPartParser, FormParser]
     serializer_class = ProductSerializers
 
 class ProductDeleteView(DestroyAPIView):
