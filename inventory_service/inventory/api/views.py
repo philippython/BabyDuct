@@ -3,7 +3,7 @@ from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework.parsers import MultiPartParser, FormParser
 from django.shortcuts import get_object_or_404
-from inventory.models import Product
+from inventory.models import Product, Review
 from inventory.api.serializers import ProductSerializers, ReviewSerializers, ProductsImageSerializers
 
 class ProductCreateView(CreateAPIView):
@@ -24,16 +24,36 @@ class ProductDetailView(RetrieveAPIView):
 
 class ProductUpdateView(UpdateAPIView):
     parser_class = [MultiPartParser, FormParser]
+    queryset = Product.objects.all()
+    lookup_field = "slug"
     serializer_class = ProductSerializers
 
 class ProductDeleteView(DestroyAPIView):
+    queryset = Product.objects.all()
     serializer_class = ProductSerializers
     lookup_field = "slug"
-    queryset = Product.objects.get(lookup_field)
-    
+
 class ReviewCreateView(CreateAPIView):
     serializer_class = ReviewSerializers
 
+class ReviewsListView(ListAPIView):
+    serializer_class = ReviewSerializers
+    queryset = Review.objects.all()
+    lookup_field = "slug"
 
-    
-                
+class ReviewUpdateView(UpdateAPIView):
+    queryset = Review.objects.all()
+    lookup_field = "slug"
+    serializer_class = ReviewSerializers
+
+class ReviewDeleteView(DestroyAPIView):
+    queryset = Review.objects.all()
+    serializer_class = ReviewSerializers
+    lookup_field = "slug"
+
+
+
+class UserReviewsListView(ListAPIView):
+    serializer_class = ReviewSerializers
+    queryset = Review.objects.all()
+    lookup_field = "date"
