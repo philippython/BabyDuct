@@ -5,7 +5,7 @@ from django.core.validators import MinValueValidator, MaxValueValidator
 
 # Create your models here.
 class Product(models.Model):
-    name = models.CharField(max_length=50, blank=False)
+    name = models.CharField(max_length=50, unique=True, blank=False)
     description = models.CharField(max_length=255, blank=False)
     slug = models.CharField(max_length=80, blank=False, null=False)
     category = models.CharField(max_length=9, choices=[("toys", "toys"), ("foods", "foods"), ("cosmetics", "cosmetics"), ("fashion", "fashion")])
