@@ -22,12 +22,16 @@ class ProductDetailView(RetrieveAPIView):
         serializer = ProductSerializers(product)
         return Response(serializer.data, 200)
 
-class ProductUpdateView(ProductCreateView, UpdateAPIView):
+class ProductUpdateView(UpdateAPIView):
+    parser_class = [MultiPartParser, FormParser]
     queryset = Product.objects.all()
     lookup_field = "slug"
+    serializer_class = ProductSerializers
 
-class ProductDeleteView(ProductUpdateView, DestroyAPIView):
-    pass
+class ProductDeleteView(DestroyAPIView):
+    queryset = Product.objects.all()
+    serializer_class = ProductSerializers
+    lookup_field = "slug"
 
 class ReviewCreateView(CreateAPIView):
     serializer_class = ReviewSerializers
@@ -37,5 +41,19 @@ class ReviewsListView(ListAPIView):
     queryset = Review.objects.all()
     lookup_field = "slug"
 
-class UserReviewsListView(ReviewsListView):
+class ReviewUpdateView(UpdateAPIView):
+    queryset = Review.objects.all()
+    lookup_field = "slug"
+    serializer_class = ReviewSerializers
+
+class ReviewDeleteView(DestroyAPIView):
+    queryset = Review.objects.all()
+    serializer_class = ReviewSerializers
+    lookup_field = "slug"
+
+
+
+class UserReviewsListView(ListAPIView):
+    serializer_class = ReviewSerializers
+    queryset = Review.objects.all()
     lookup_field = "date"
