@@ -1,21 +1,22 @@
 from distutils.command.upload import upload
 from django.db import models
-from django.contrib.auth.models import User
+from django.contrib.auth.models import AbstractUser
+from uuid import uuid4
 
 # Create your models here.
-class Customer_Profile(models.Model):
-    MALE = 'M'
-    FEMALE = 'F'
+class User(AbstractUser):
+    uuid = models.UUIDField()
 
-    GENDER_CHOICES = [
-        (MALE, 'Male'),
-        (FEMALE, 'Female')
-    ]
+    def __str__(self) -> str:
+        return self.username
 
+class UserProfile(models.Model):
+
+    bio = models.TextField(null=True, max_length=255)
     user = models.OneToOneField(User, on_delete=models.CASCADE)
     profile_image  =  models.ImageField(null=True, max_length=100, upload_to='consumer')
-    gender = models.CharField(max_length=6, choices=GENDER_CHOICES)
     contact_no = models.CharField(max_length=11)
+    is_producer = models.BooleanField(default=False)
     age = models.IntegerField()
 
 
