@@ -23,6 +23,9 @@ class ConsumerProfile(models.Model):
     def __str__(self):
         return "%s" % (self.user.username) 
 
+    def get_absolute_url(self):
+        return "consumer/profile/{}".format(self.user)
+
 class ProducerProfile(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
     company_name = models.CharField(max_length=150, null=False)
@@ -33,3 +36,6 @@ class ProducerProfile(models.Model):
     
     def __str__(self):
         return "%s" % (self.user.username) 
+
+    def get_absolute_url(self):
+        return "producer/profile/{}".format(self.user)

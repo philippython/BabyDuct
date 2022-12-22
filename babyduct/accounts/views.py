@@ -1,7 +1,9 @@
-# from accounts.api.serializers import CustomerProfileSerializers
-from django.core.exceptions import ValidationError
-# from rest_framework.generics import CreateAPIView
+from accounts.api.serializers import ConsumerProfileSerializers, ProducerProfileSerializers
+from rest_framework.generics import CreateAPIView
 
-# # Create your views here.
-# class CreateCustomerProfileView(CreateAPIView):
-#     serializer_class = CustomerProfileSerializers
+
+# Create your views here.
+
+class ConsumerProfileCreateView(CreateAPIView):
+    serializer_class = ConsumerProfileSerializers
+
