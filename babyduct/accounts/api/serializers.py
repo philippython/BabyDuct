@@ -1,8 +1,13 @@
 from rest_framework import serializers
-from django.contrib.auth.models import User
-from accounts.models import Customer_Profile
+from accounts.models import ConsumerProfile, ProducerProfile
 
-class CustomerProfileSerializers(serializers.ModelSerializer):
+class ConsumerProfileSerializers(serializers.ModelSerializer):
+    url = serializers.CharField(source='get_absolute_url', read_only=True)
     class Meta:
-        model = Customer_Profile
+        model = ConsumerProfile
+        fields = '__all__'
+
+class ProducerProfileSerializers(serializers.ModelSerializer):
+    class Meta:
+        model = ProducerProfile
         fields = '__all__'
