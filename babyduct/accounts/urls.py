@@ -1,9 +1,8 @@
 from django.urls import path
-from accounts.views import CreateCustomerProfileView, RegisterView
+# from accounts.views import CreateCustomerProfileView
 
 
-app_name = 'accounts'
+# app_name = 'accounts'
 urlpatterns = [
-    path('register', RegisterView.as_view(), name='register_user'),
-    path('new-customer-profile', CreateCustomerProfileView.as_view(), name='create_customer_profile')
+    # path('new-customer-profile', CreateCustomerProfileView.as_view(), name='create_customer_profile')
 ]
