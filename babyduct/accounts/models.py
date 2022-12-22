@@ -23,7 +23,7 @@ class ConsumerProfile(models.Model):
         return "%s" % (self.user.username) 
 
     def get_absolute_url(self):
-        return "consumer/profile/{}".format(self.user)
+        return "consumer/profile/{}".format(self.user.uuid)
 
 class ProducerProfile(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
@@ -37,4 +37,4 @@ class ProducerProfile(models.Model):
         return "%s" % (self.user.username) 
 
     def get_absolute_url(self):
-        return "producer/profile/{}".format(self.user)
+        return "producer/profile/{}".format(self.user.uuid)
