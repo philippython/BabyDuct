@@ -17,7 +17,6 @@ class ConsumerProfile(models.Model):
     location = models.CharField(max_length=150, null=False)
     profile_image = models.ImageField(null=True, max_length=100, upload_to='consumers')
     contact_no = models.CharField(max_length=11)
-    age = models.IntegerField()
 
 
     def __str__(self):
@@ -28,9 +27,11 @@ class ConsumerProfile(models.Model):
 
 class ProducerProfile(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
-    company_name = models.CharField(max_length=150, null=False)
-    company_logo = models.ImageField(null=True, max_length=100, upload_to='producers', unique=True)
-    company_email = models.EmailField()
+    store_name = models.CharField(max_length=150, null=False)
+    store_logo = models.ImageField(null=True, max_length=100, upload_to='producers', unique=True)
+    store_email = models.EmailField()
+    location = models.CharField(max_length=150, null=False)
+    business_certificate = models.FileField(upload_to='Files')
     contact_no = models.CharField(max_length=11)
 
     
