@@ -37,3 +37,36 @@ class ConsumerProfileDeleteView(DestroyAPIView):
     def perform_destroy(self, instance):
         user = get_object_or_404(User, username=instance.user)
         user.delete()
+
+
+# producer views here
+class ProducerProfileCreateView(CreateAPIView):
+    serializer_class = ProducerProfileSerializers
+
+
+class ProducerListAPIView(ListAPIView):
+    serializer_class = ProducerProfileSerializers
+    queryset = ProducerProfile.objects.all()
+
+
+class ProducerProfileView(RetrieveAPIView):
+    serializer_class = ProducerProfileSerializers
+
+    def get(self, request, uuid):
+        Producer = get_object_or_404(ProducerProfile, user=uuid)
+        serializer = ProducerProfileSerializers(Producer)
+        return Response(serializer.data, 200)
+
+class ProducerProfileUpdateView(UpdateAPIView):
+    serializer_class = ProducerProfileSerializers
+    queryset = ProducerProfile.objects.all()
+    lookup_field = "user"
+
+class ProducerProfileDeleteView(DestroyAPIView):
+    serializer_class = ProducerProfileSerializers
+    queryset = ProducerProfile.objects.all()
+    lookup_field = "user"
+
+    def perform_destroy(self, instance):
+        user = get_object_or_404(User, username=instance.user)
+        user.delete()
