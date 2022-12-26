@@ -30,8 +30,8 @@ class ProducerProfile(models.Model):
     store_name = models.CharField(max_length=150, null=False)
     store_logo = models.ImageField(null=True, max_length=100, upload_to='producers', unique=True)
     store_email = models.EmailField()
-    location = models.CharField(max_length=150, null=False)
-    business_certificate = models.FileField(upload_to='Files')
+    location = models.CharField(max_length=150, null=True)
+    business_certificate = models.FileField(upload_to='Files', default=None)
     contact_no = models.CharField(max_length=11)
 
     
