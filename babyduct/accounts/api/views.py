@@ -1,4 +1,9 @@
-from accounts.api.serializers import ConsumerProfileSerializers, ProducerProfileSerializers
+from allauth.socialaccount.providers.twitter.views import TwitterOAuthAdapter
+from dj_rest_auth.registration.views import SocialLoginView
+from dj_rest_auth.social_serializers import TwitterLoginSerializer
+from allauth.socialaccount.providers.facebook.views import FacebookOAuth2Adapter
+from dj_rest_auth.registration.views import SocialLoginView
+from .serializers import ConsumerProfileSerializers, ProducerProfileSerializers
 from accounts.models import *
 from django.shortcuts import get_object_or_404
 from rest_framework.generics import CreateAPIView, RetrieveAPIView, ListAPIView, UpdateAPIView, DestroyAPIView
@@ -69,3 +74,10 @@ class ProducerProfileDeleteView(DestroyAPIView):
     def perform_destroy(self, instance):
         user = get_object_or_404(User, username=instance.user)
         user.delete()
+
+class FacebookLogin(SocialLoginView):
+    adapter_class = FacebookOAuth2Adapter
+
+class TwitterLogin(SocialLoginView):
+    serializer_class = TwitterLoginSerializer
+    adapter_class = TwitterOAuthAdapter
