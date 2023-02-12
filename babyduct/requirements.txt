@@ -18,3 +18,6 @@ SQLAlchemy==1.4.41
 sqlparse==0.4.2
 swagger-ui-bundle==0.0.9
 python-dotenv==0.21.1
+django-rest-auth==0.9.5
+dj-rest-auth==2.2.7
+django-allauth==0.52.0
