@@ -12,6 +12,7 @@ https://docs.djangoproject.com/en/4.0/ref/settings/
 import os
 from pathlib import Path
 from dotenv import load_dotenv
+import dj_database_url
 
 load_dotenv()
 
@@ -54,11 +55,26 @@ INSTALLED_APPS = [
     # modules to support social authentication
     'allauth.socialaccount.providers.facebook',
     'allauth.socialaccount.providers.twitter',
+    'allauth.socialaccount.providers.google',
 
+    # accounts app
     'accounts',
+
 ]
 
 AUTH_USER_MODEL = 'accounts.User'
+
+ACCOUNT_AUTHENTICATION_METHOD = 'email'
+ACCOUNT_EMAIL_REQUIRED = True
+ACCOUNT_EMAIL_VERIFICATION = 'mandatory'
+
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_USE_TLS = True
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_HOST_USER = 'odulajaphilip@gmail.com'
+EMAIL_HOST_PASSWORD = os.getenv("SMTP_EMAIL")
+EMAIL_PORT = 587
+
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
@@ -95,10 +111,7 @@ WSGI_APPLICATION = 'babyduct.wsgi.application'
 # https://docs.djangoproject.com/en/4.0/ref/settings/#databases
 
 DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
-    }
+    'default': dj_database_url.parse(os.getenv("DATABASE_URL"))
 }
 
 

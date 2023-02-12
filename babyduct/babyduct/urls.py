@@ -20,12 +20,13 @@ from django.conf.urls.static import static
 from django.views.generic import TemplateView
 from rest_framework.schemas import get_schema_view
 from rest_auth.views import PasswordResetConfirmView
-from accounts.api.views import FacebookLogin, TwitterLogin
+from accounts.api.views import FacebookLogin, TwitterLogin, GoogleLogin
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('api/v1/auth/', include('dj_rest_auth.urls')),
     path("api/v1/auth/facebook", FacebookLogin.as_view(), name="facebook_login"),
+    path('api/vi/auth/google/', GoogleLogin.as_view(), name='google_login'),
     path("api/v1/auth/twitter", TwitterLogin.as_view(), name="twitter_login"),
     path('api/v1/registration/', include('dj_rest_auth.registration.urls')),
     path('api/v1/auth/password/reset/confirm/<str:uidb64>/<str:token>', PasswordResetConfirmView.as_view(),
