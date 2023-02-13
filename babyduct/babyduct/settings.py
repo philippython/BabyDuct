@@ -110,7 +110,7 @@ WSGI_APPLICATION = 'babyduct.wsgi.application'
 # https://docs.djangoproject.com/en/4.0/ref/settings/#databases
 
 DATABASES = {
-    'default': dj_database_url.config()
+    'default': dj_database_url.parse("postgres://accounts_sevice_db_user:hlNqtKi0pOS7bRNZXs0HHEyIyjYfcauL@dpg-cfk34m5a49903fmb26kg-a.oregon-postgres.render.com/accounts_sevice_db")
 }
 
 
