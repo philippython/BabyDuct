@@ -19,7 +19,7 @@ from django.conf import settings
 from django.conf.urls.static import static 
 from django.views.generic import TemplateView
 from rest_framework.schemas import get_schema_view
-from rest_auth.views import PasswordResetConfirmView
+from dj_rest_auth.views import PasswordResetConfirmView
 from accounts.api.views import FacebookLogin, TwitterLogin, GoogleLogin
 
 urlpatterns = [
