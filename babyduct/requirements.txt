@@ -1,3 +1,4 @@
+uritemplate.py==3.0.2
 asgiref==3.5.2
 dj-database-url==0.5.0
 dj-static==0.0.6
