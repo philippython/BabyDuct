@@ -29,7 +29,7 @@ SECRET_KEY = "django-insecure-6o@vr%8^-kz%ei=*^9r04bd)f*)f=c85_iz5f4y+0a9&w@1!z#
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ["babyduct-accounts-service.up.railway.app", "localhost"]
+ALLOWED_HOSTS = ['*']
 
 # Application definition
 
@@ -177,3 +177,8 @@ REST_FRAMEWORK = {
 }
 
 CORS_ORIGIN_ALLOW_ALL = True
+CORS_ORIGIN_WHITELIST = (
+       'http://localhost:8000',
+       'https://babyduct-accounts-service.up.railway.app'
+       
+)
