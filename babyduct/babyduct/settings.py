@@ -114,8 +114,6 @@ WSGI_APPLICATION = 'babyduct.wsgi.application'
 DATABASES = {
     'default': dj_database_url.parse("postgresql://postgres:pItccfRuEJGldRCYgJNS@containers-us-west-27.railway.app:7078/railway")
 }
-
-
 # Password validation
 # https://docs.djangoproject.com/en/4.0/ref/settings/#auth-password-validators
 
@@ -176,4 +174,6 @@ REST_FRAMEWORK = {
         'rest_framework.parsers.FormParser',
         'rest_framework.parsers.MultiPartParser',
     ]
+
 }
+
