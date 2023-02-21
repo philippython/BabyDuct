@@ -114,8 +114,6 @@ WSGI_APPLICATION = 'babyduct.wsgi.application'
 DATABASES = {
     'default': dj_database_url.parse("postgresql://postgres:pItccfRuEJGldRCYgJNS@containers-us-west-27.railway.app:7078/railway")
 }
-
-
 # Password validation
 # https://docs.djangoproject.com/en/4.0/ref/settings/#auth-password-validators
 
@@ -153,7 +151,10 @@ SITE_ID = 1
 # https://docs.djangoproject.com/en/4.0/howto/static-files/
 
 STATIC_URL = 'static/'
-STATICFILES_DIR = os.path.join(BASE_DIR, 'static')
+STATIC_ROOT = 'static'
+STATICFILES_DIR = [
+    os.path.join(BASE_DIR, 'static'),
+]
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.0/ref/settings/#default-auto-field
@@ -173,7 +174,6 @@ REST_FRAMEWORK = {
         'rest_framework.parsers.FormParser',
         'rest_framework.parsers.MultiPartParser',
     ]
+
 }
 
-CORS_ORIGIN_ALLOW_ALL = True
-CSRF_TRUSTED_ORIGINS = ["https://babyduct-accounts-service.up.railway.app/"]
