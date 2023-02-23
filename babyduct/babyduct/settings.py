@@ -24,7 +24,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/4.0/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = "django-insecure-6o@vr%8^-kz%ei=*^9r04bd)f*)f=c85_iz5f4y+0a9&w@1!z#"
+SECRET_KEY = os.environ.get("SECRET_KEY")
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
@@ -70,8 +70,8 @@ ACCOUNT_EMAIL_VERIFICATION = 'mandatory'
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 EMAIL_USE_TLS = True
 EMAIL_HOST = 'smtp.gmail.com'
-EMAIL_HOST_USER = 'odulajaphilip@gmail.com'
-EMAIL_HOST_PASSWORD = os.getenv("SMTP_EMAIL")
+EMAIL_HOST_USER = os.environ.get("EMAIL_HOST")
+EMAIL_HOST_PASSWORD = os.environ.get("APP_PASSWORD")
 EMAIL_PORT = 587
 
 
@@ -114,8 +114,6 @@ WSGI_APPLICATION = 'babyduct.wsgi.application'
 DATABASES = {
     'default': dj_database_url.parse("postgresql://postgres:pItccfRuEJGldRCYgJNS@containers-us-west-27.railway.app:7078/railway")
 }
-
-
 # Password validation
 # https://docs.djangoproject.com/en/4.0/ref/settings/#auth-password-validators
 
@@ -153,7 +151,10 @@ SITE_ID = 1
 # https://docs.djangoproject.com/en/4.0/howto/static-files/
 
 STATIC_URL = 'static/'
-STATICFILES_DIR = os.path.join(BASE_DIR, 'static')
+STATIC_ROOT = 'static'
+STATICFILES_DIR = [
+    os.path.join(BASE_DIR, 'static'),
+]
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.0/ref/settings/#default-auto-field
@@ -173,7 +174,6 @@ REST_FRAMEWORK = {
         'rest_framework.parsers.FormParser',
         'rest_framework.parsers.MultiPartParser',
     ]
+
 }
 
-CORS_ORIGIN_ALLOW_ALL = True
-CSRF_TRUSTED_ORIGINS = ["https://babyduct-accounts-service.up.railway.app/"]
