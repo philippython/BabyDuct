@@ -18,18 +18,13 @@ from django.urls import path, include
 from django.contrib.staticfiles.urls import staticfiles_urlpatterns
 from django.views.generic import TemplateView
 from rest_framework.schemas import get_schema_view
-from dj_rest_auth.views import PasswordResetConfirmView
 from accounts.api.views import FacebookLogin, TwitterLogin, GoogleLogin
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('api/v1/auth/', include('dj_rest_auth.urls')),
     path("api/v1/auth/facebook", FacebookLogin.as_view(), name="facebook_login"),
     path('api/vi/auth/google/', GoogleLogin.as_view(), name='google_login'),
     path("api/v1/auth/twitter", TwitterLogin.as_view(), name="twitter_login"),
-    path('api/v1/registration/', include('dj_rest_auth.registration.urls')),
-    path('api/v1/auth/password/reset/confirm/<str:uidb64>/<str:token>', PasswordResetConfirmView.as_view(),
-            name='password_reset_confirm'),
     path('api/v1/accounts/', include('accounts.api.urls')),
     
     # Route TemplateView to serve Swagger UI template.
