@@ -1,9 +1,14 @@
 from django.urls import path
 from .views import *
-from django import utils
 
 
 urlpatterns = [
+
+    # auth urls
+    path('auth/register/seller', create_producer, name='register_seller'),
+    path('auth/register/buyer', create_consumer, name='register_buyer'),
+    path('auth/login', user_login, name="user_login"),
+
     # consumer urls
     path('consumer/create-profile', ConsumerProfileCreateView.as_view(), name='create_consumer_profile'),
     path('consumer/all', ConsumerListAPIView.as_view(), name='all_consumers'),
