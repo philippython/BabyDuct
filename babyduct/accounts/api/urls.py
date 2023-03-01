@@ -8,6 +8,7 @@ urlpatterns = [
     path('auth/register/seller', create_producer, name='register_seller'),
     path('auth/register/buyer', create_consumer, name='register_buyer'),
     path('auth/login', user_login, name="user_login"),
+    path('auth/logout', logout_view, name="logout" ),
 
     # consumer urls
     path('consumer/create-profile', ConsumerProfileCreateView.as_view(), name='create_consumer_profile'),
