@@ -22,21 +22,16 @@ from accounts.api.views import FacebookLogin, TwitterLogin, GoogleLogin
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path("api/v1/auth/facebook", FacebookLogin.as_view(), name="facebook_login"),
-    path('api/vi/auth/google/', GoogleLogin.as_view(), name='google_login'),
-    path("api/v1/auth/twitter", TwitterLogin.as_view(), name="twitter_login"),
+    # path("api/v1/auth/facebook", FacebookLogin.as_view(), name="facebook_login"),
+    # path('api/v1/auth/google', GoogleLogin.as_view(), name='google_login'),
+    # path("api/v1/auth/twitter", TwitterLogin.as_view(), name="twitter_login"),
     path('api/v1/accounts/', include('accounts.api.urls')),
     
-    # Route TemplateView to serve Swagger UI template.
-    #   * Provide `extra_context` with view name of `SchemaView`.
     path('swagger-ui/', TemplateView.as_view(
         template_name='swagger-ui.html',
         extra_context={'schema_url':'accounts-schema'}
     ), name='swagger-ui'),
 
-    # Use the `get_schema_view()` helper to add a `SchemaView` to project URLs.
-    #   * `title` and `description` parameters are passed to `SchemaGenerator`.
-    #   * Provide view name for use with `reverse()`.
     path('accounts-api-schema', get_schema_view(
         title="BabyDuct User Accounts and Authentication Schema",
         description="API for BabyDuct Users",

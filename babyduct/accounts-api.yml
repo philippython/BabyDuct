@@ -1,0 +1,394 @@
+openapi: 3.0.2
+info:
+  title: ''
+  version: ''
+paths:
+  /api/v1/accounts/consumer/all:
+    get:
+      operationId: listConsumerProfiles
+      description: ''
+      parameters: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/ConsumerProfiles'
+          description: ''
+      tags:
+      - api
+  /api/v1/accounts/consumer/profile/{uuid}:
+    get:
+      operationId: retrieveConsumerProfileSerializers
+      description: ''
+      parameters:
+      - name: uuid
+        in: path
+        required: true
+        description: ''
+        schema:
+          type: string
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ConsumerProfiles'
+          description: ''
+      tags:
+      - api
+  /api/v1/accounts/producer/all:
+    get:
+      operationId: listProducerProfiles
+      description: ''
+      parameters: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/ProducerProfiles'
+          description: ''
+      tags:
+      - api
+  /api/v1/accounts/producer/profile/{uuid}:
+    get:
+      operationId: retrieveProducerProfileSerializers
+      description: ''
+      parameters:
+      - name: uuid
+        in: path
+        required: true
+        description: ''
+        schema:
+          type: string
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProducerProfiles'
+          description: ''
+      tags:
+      - api
+  /api/v1/accounts/auth/register/seller:
+    post:
+      operationId: createcreate_producer
+      description: ''
+      parameters: []
+      requestBody:
+        content:
+          application/json:
+            schema: {}
+          application/x-www-form-urlencoded:
+            schema: {}
+          multipart/form-data:
+            schema: {}
+      responses:
+        '201':
+          content:
+            application/json:
+              schema: {}
+          description: ''
+      tags:
+      - api
+  /api/v1/accounts/auth/register/buyer:
+    post:
+      operationId: createcreate_consumer
+      description: ''
+      parameters: []
+      requestBody:
+        content:
+          application/json:
+            schema: {}
+          application/x-www-form-urlencoded:
+            schema: {}
+          multipart/form-data:
+            schema: {}
+      responses:
+        '201':
+          content:
+            application/json:
+              schema: {}
+          description: ''
+      tags:
+      - api
+  /api/v1/accounts/auth/login:
+    post:
+      operationId: createuser_login
+      description: ''
+      parameters: []
+      requestBody:
+        content:
+          application/json:
+            schema: {}
+          application/x-www-form-urlencoded:
+            schema: {}
+          multipart/form-data:
+            schema: {}
+      responses:
+        '201':
+          content:
+            application/json:
+              schema: {}
+          description: ''
+      tags:
+      - api
+  /api/v1/accounts/consumer/create-profile:
+    post:
+      operationId: createConsumerProfileSerializers
+      description: ''
+      parameters: []
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ConsumerProfiles'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/ConsumerProfiles'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/ConsumerProfiles'
+      responses:
+        '201':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ConsumerProfiles'
+          description: ''
+      tags:
+      - api
+  /api/v1/accounts/producer/create-profile:
+    post:
+      operationId: createProducerProfileSerializers
+      description: ''
+      parameters: []
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ProducerProfiles'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/ProducerProfiles'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/ProducerProfiles'
+      responses:
+        '201':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProducerProfiles'
+          description: ''
+      tags:
+      - api
+  /api/v1/accounts/consumer/profile/{user}/edit:
+    put:
+      operationId: updateConsumerProfile
+      description: ''
+      parameters:
+      - name: user
+        in: path
+        required: true
+        description: ''
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ConsumerProfiles'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/ConsumerProfiles'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/ConsumerProfiles'
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ConsumerProfiles'
+          description: ''
+      tags:
+      - api
+    patch:
+      operationId: partialUpdateConsumerProfile
+      description: ''
+      parameters:
+      - name: user
+        in: path
+        required: true
+        description: ''
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ConsumerProfiles'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/ConsumerProfiles'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/ConsumerProfiles'
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ConsumerProfiles'
+          description: ''
+      tags:
+      - api
+  /api/v1/accounts/producer/profile/{user}/edit:
+    put:
+      operationId: updateProducerProfile
+      description: ''
+      parameters:
+      - name: user
+        in: path
+        required: true
+        description: ''
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ProducerProfiles'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/ProducerProfiles'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/ProducerProfiles'
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProducerProfiles'
+          description: ''
+      tags:
+      - api
+    patch:
+      operationId: partialUpdateProducerProfile
+      description: ''
+      parameters:
+      - name: user
+        in: path
+        required: true
+        description: ''
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ProducerProfiles'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/ProducerProfiles'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/ProducerProfiles'
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProducerProfiles'
+          description: ''
+      tags:
+      - api
+  /api/v1/accounts/consumer/profile/{user}/delete:
+    delete:
+      operationId: destroyConsumerProfile
+      description: ''
+      parameters:
+      - name: user
+        in: path
+        required: true
+        description: ''
+        schema:
+          type: string
+      responses:
+        '204':
+          description: ''
+      tags:
+      - api
+  /api/v1/accounts/producer/profile/{user}/delete:
+    delete:
+      operationId: destroyProducerProfile
+      description: ''
+      parameters:
+      - name: user
+        in: path
+        required: true
+        description: ''
+        schema:
+          type: string
+      responses:
+        '204':
+          description: ''
+      tags:
+      - api
+components:
+  schemas:
+    ConsumerProfiles:
+      type: object
+      properties:
+        id:
+          type: integer
+          readOnly: true
+        url:
+          type: string
+          readOnly: true
+        location:
+          type: string
+          maxLength: 150
+        contact_no:
+          type: string
+          maxLength: 11
+        user:
+          type: string
+      required:
+      - location
+      - contact_no
+      - user
+    ProducerProfiles:
+      type: object
+      properties:
+        id:
+          type: integer
+          readOnly: true
+        cac_reg_no:
+          type: string
+          maxLength: 20
+        product_category:
+          enum:
+          - toys
+          - foods
+          - cosmetics
+          - fashion
+          type: string
+        location:
+          type: string
+          maxLength: 150
+        contact_no:
+          type: string
+          maxLength: 11
+        user:
+          type: string
+      required:
+      - contact_no
+      - user
