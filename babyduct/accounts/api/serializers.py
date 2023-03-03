@@ -30,10 +30,10 @@ class ProducerRegistrationSerializers(serializers.ModelSerializer):
         password2 = self.validated_data["password2"]
 
         if User.objects.filter(email=email).exists():
-            return serializers.ValidationError({"error": "email already in use by another user"})
+            raise serializers.ValidationError({"error": "email already in use by another user"})
         
         if password1 != password2:
-            return serializers.ValidationError({"error": "Password and confirm Password does not match"})
+            raise serializers.ValidationError({"error": "Password and confirm Password does not match"})
         
         user = User(username=username, email=email,first_name=first_name,last_name=last_name)
         user.set_password(password1)
