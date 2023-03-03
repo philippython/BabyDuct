@@ -17,7 +17,6 @@ class User(AbstractUser):
 
 class ConsumerProfile(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
-    location = models.CharField(max_length=150, null=False)
     contact_no = models.CharField(max_length=11)
 
 
