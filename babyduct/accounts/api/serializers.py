@@ -47,11 +47,10 @@ class ProducerRegistrationSerializers(serializers.ModelSerializer):
 
 class ConsumerRegistrationSerializers(serializers.ModelSerializer):
     password2 = serializers.CharField(style={ "input_type":"password"}, write_only=True)
-    location = serializers.CharField()
 
     class Meta:
         model = User
-        fields = ["first_name", "last_name", "email", "password", "password2",  "location"]
+        fields = ["first_name", "last_name", "email", "password", "password2"]
         extra_kwargs = {
             "password" : {"write_only": True}
         }
@@ -60,7 +59,6 @@ class ConsumerRegistrationSerializers(serializers.ModelSerializer):
         email = self.validated_data["email"]
         first_name = self.validated_data["first_name"]
         last_name = self.validated_data["last_name"]
-        location = self.validated_data["location"]
 
         username = f"{first_name}-{last_name}-{random.randint(5643, 55573)}"
         password1 = self.validated_data["password"]
@@ -76,7 +74,7 @@ class ConsumerRegistrationSerializers(serializers.ModelSerializer):
         user.set_password(password1)
         user.save()
 
-        buyer = ConsumerProfile(user=user, location=location)
+        buyer = ConsumerProfile(user=user)
         buyer.save()
 
         return user
