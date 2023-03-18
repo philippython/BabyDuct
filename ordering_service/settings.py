@@ -42,6 +42,12 @@ INSTALLED_APPS = [
     'OrderingServiceDRF'
 ]
 
+REST_FRAMEWORK = {
+"DEFAULT_PERMISSION_CLASSES": [
+"rest_framework.permissions.IsAuthenticated", 
+],
+}
+
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
@@ -52,6 +58,11 @@ MIDDLEWARE = [
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
+
+CORS_ORIGIN_WHITELIST = (
+"http://localhost:3000",
+"http://localhost:8000",
+)
 
 ROOT_URLCONF = 'ordering_service.urls'
 
