@@ -14,29 +14,35 @@ Including another URLconf
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
 from django.contrib import admin
-from django.urls import path, include
+from django.urls import path, include, re_path
 from django.contrib.staticfiles.urls import staticfiles_urlpatterns
 from django.views.generic import TemplateView
-from rest_framework.schemas import get_schema_view
+from rest_framework import permissions
+from drf_yasg.views import get_schema_view
+from drf_yasg import openapi
 from accounts.api.views import FacebookLogin, TwitterLogin, GoogleLogin
+
+schema_view = get_schema_view(openapi.Info(
+      title="Babyduct accounts service API Documentation",
+      default_version='v1',
+      description="Test description",
+      terms_of_service="https://www.google.com/policies/terms/",
+      contact=openapi.Contact(email="contact@snippets.local"),
+      license=openapi.License(name="BSD License"),
+   ),
+   public=True,
+   permission_classes=[permissions.AllowAny],
+)
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     # path("api/v1/auth/facebook", FacebookLogin.as_view(), name="facebook_login"),
     # path('api/v1/auth/google', GoogleLogin.as_view(), name='google_login'),
     # path("api/v1/auth/twitter", TwitterLogin.as_view(), name="twitter_login"),
+    re_path(r'^swagger(?P<format>\.json|\.yaml)$', schema_view.without_ui(cache_timeout=0), name='schema-json'),
+    re_path(r'^swagger/$', schema_view.with_ui('swagger', cache_timeout=0), name='schema-swagger-ui'),
+    re_path(r'^redoc/$', schema_view.with_ui('redoc', cache_timeout=0), name='schema-redoc'),
     path('api/v1/accounts/', include('accounts.api.urls')),
-    
-    path('swagger-ui/', TemplateView.as_view(
-        template_name='swagger-ui.html',
-        extra_context={'schema_url':'accounts-schema'}
-    ), name='swagger-ui'),
-
-    path('accounts-api-schema', get_schema_view(
-        title="BabyDuct User Accounts and Authentication Schema",
-        description="API for BabyDuct Users",
-        version="1.0.0"
-    ), name='accounts-schema'),
 ]
 
 urlpatterns += staticfiles_urlpatterns()

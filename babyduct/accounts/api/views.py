@@ -1,10 +1,12 @@
 from accounts.models import *
 from .serializers import *
-from django.shortcuts import get_object_or_404
 from .helper import *
+from drf_yasg import openapi
+from drf_yasg.utils import swagger_auto_schema
+from django.shortcuts import get_object_or_404
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
-from rest_framework.viewsets import ViewSet, ModelViewSet
+from rest_framework.viewsets import ModelViewSet
 from rest_framework.status import HTTP_200_OK, HTTP_201_CREATED, HTTP_202_ACCEPTED, HTTP_400_BAD_REQUEST
 from rest_framework.generics import CreateAPIView, RetrieveAPIView, ListAPIView, UpdateAPIView, DestroyAPIView
 from allauth.socialaccount.providers.twitter.views import TwitterOAuthAdapter
@@ -20,9 +22,29 @@ from dj_rest_auth.social_serializers import TwitterLoginSerializer
 # authentication views
 
 # seller registration
+@swagger_auto_schema(method='post',
+                     operation_description='Registration endpoint for seller.',
+                     request_body= openapi.Schema(
+                                    type = openapi.TYPE_OBJECT,
+                                    properties = {
+                                        'first_name': openapi.Schema(type=openapi.TYPE_STRING),
+                                        'last_name': openapi.Schema(type=openapi.TYPE_STRING),
+                                        'email': openapi.Schema(type=openapi.TYPE_STRING, format='email'),
+                                        'password': openapi.Schema(type=openapi.TYPE_STRING),
+                                        'password2': openapi.Schema(type=openapi.TYPE_STRING),
+                                        'cac_reg': openapi.Schema(type=openapi.TYPE_STRING),
+                                        'product_category': openapi.Schema(type=openapi.TYPE_STRING),
+                                        'location': openapi.Schema(type=openapi.TYPE_STRING)
+                                    }
+                        ),
+                     responses={
+                         200: openapi.Response('Success'),
+                         201: openapi.Response('Created'),
+                         401: openapi.Response('Unauthorized'),
+                         404: openapi.Response('Not found')
+                     })
 @api_view(['POST'])
 def create_seller(request):
-
     if request.method == 'POST':
         serializer = SellerRegistrationSerializers(data=request.data)
 
@@ -39,6 +61,22 @@ def create_seller(request):
 
 
 # buyer registration
+@swagger_auto_schema(method='post',
+                     operation_description='Registration endpoint for buyers.',
+                     request_body= openapi.Schema(
+                                    type = openapi.TYPE_OBJECT,
+                                    properties = {
+                                        'first_name': openapi.Schema(type=openapi.TYPE_STRING),
+                                        'last_name': openapi.Schema(type=openapi.TYPE_STRING),
+                                        'email': openapi.Schema(type=openapi.TYPE_STRING, format='email'),
+                                        'password': openapi.Schema(type=openapi.TYPE_STRING),
+                                        'password2': openapi.Schema(type=openapi.TYPE_STRING)
+                                    }),
+                     responses={
+                         200: openapi.Response('Success'),
+                         401: openapi.Response('Unauthorized'),
+                         404: openapi.Response('Not found')
+                     })
 @api_view(['POST'])
 def create_buyer(request):
 
@@ -57,6 +95,20 @@ def create_buyer(request):
         return Response(data, status=HTTP_201_CREATED)
 
 # login view
+@swagger_auto_schema(method='post',
+                     operation_description='User login endpoint .',
+                     request_body = openapi.Schema(
+                        type = openapi.TYPE_OBJECT,
+                        properties = {
+                            "email" : openapi.Schema(type=openapi.TYPE_STRING, format='email'),
+                            "password" : openapi.Schema(type=openapi.TYPE_STRING)
+                        }
+                     ),
+                     responses={
+                         200: openapi.Response('Success'),
+                         401: openapi.Response('Unauthorized'),
+                         404: openapi.Response('Not found')
+                     })
 @api_view(['POST',])
 def user_login(request):
     if request.method== "POST":
@@ -77,6 +129,13 @@ def user_login(request):
 # reset password view
 
 # logout view
+@swagger_auto_schema(method='post',
+                     operation_description='User logout endpoint',
+                     responses={
+                         200: openapi.Response('Success'),
+                         401: openapi.Response('Unauthorized'),
+                         404: openapi.Response('Not found')
+                     })
 @api_view(['POST',])
 def logout_view(request):
 
@@ -89,7 +148,6 @@ class UserAccountInformationView(ModelViewSet):
     queryset = User.objects.all()
     serializer_class = UsersAccountInformationSerializers
 
-    
 
 # buyers payment method view
 class BuyerPaymentInformationView(ModelViewSet):

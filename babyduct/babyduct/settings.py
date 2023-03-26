@@ -42,6 +42,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'corsheaders',
     'allauth',
+    'drf_yasg',
     'rest_framework',
     'rest_framework.authtoken',
 
@@ -90,7 +91,7 @@ ROOT_URLCONF = 'babyduct.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': [os.path.join(BASE_DIR, "templates")],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -102,7 +103,6 @@ TEMPLATES = [
         },
     },
 ]
-
 WSGI_APPLICATION = 'babyduct.wsgi.application'
 
 
@@ -110,11 +110,11 @@ WSGI_APPLICATION = 'babyduct.wsgi.application'
 # https://docs.djangoproject.com/en/4.0/ref/settings/#databases
 
 DATABASES = {
-    # 'default': dj_database_url.parse("postgresql://postgres:pItccfRuEJGldRCYgJNS@containers-us-west-27.railway.app:7078/railway")
-    'default': {
-            'ENGINE': 'django.db.backends.sqlite3',
-            'NAME': BASE_DIR / 'db.sqlite3',
-        }
+    'default': dj_database_url.parse("postgres://accounts_sevice_db_user:hlNqtKi0pOS7bRNZXs0HHEyIyjYfcauL@dpg-cfk34m5a49903fmb26kg-a.oregon-postgres.render.com/accounts_sevice_db")
+    # 'default': {
+    #         'ENGINE': 'django.db.backends.sqlite3',
+    #         'NAME': BASE_DIR / 'db.sqlite3',
+    #     }
 }
 
 # Password validation
@@ -180,3 +180,6 @@ REST_FRAMEWORK = {
 }
 
 CORS_ALLOW_ALL_ORIGINS = True
+
+REST_FRAMEWORK = {'DEFAULT_SCHEMA_CLASS':'rest_framework.schemas.coreapi.AutoSchema' }
+
