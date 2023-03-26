@@ -79,7 +79,7 @@ WSGI_APPLICATION = 'inventory_service.wsgi.application'
 # https://docs.djangoproject.com/en/4.0/ref/settings/#databases
 
 DATABASES = {
-    'default' : dj_database_url.parse("")
+    'default' : dj_database_url.parse("postgres://babduct_inventory_service_db_user:9QxZtJfFeP3O6dyJjx7USKukFnLtXkRo@dpg-cggcqg4eoogqfc1esth0-a.oregon-postgres.render.com/babduct_inventory_service_db")
     # 'default': {
     #     'ENGINE': 'django.db.backends.sqlite3',
     #     'NAME': BASE_DIR / 'db.sqlite3',
@@ -131,4 +131,4 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
-CORS_ORIGIN_ALLOW_ALL = True
+CORS_ALLOW_ALL_ORIGINS = True
