@@ -3,8 +3,10 @@ from django.utils.text import slugify
 from django.urls import reverse
 from django.core.validators import MinValueValidator, MaxValueValidator
 
+
 # Create your models here.
 class Product(models.Model):
+    seller_id = models.IntegerField(default=1)
     name = models.CharField(max_length=50, unique=True, blank=False)
     description = models.CharField(max_length=255, blank=False)
     slug = models.CharField(max_length=80, blank=False, null=False)
@@ -23,6 +25,7 @@ class Product(models.Model):
         return "%s" % (self.name)
 
 class Review(models.Model):
+    reviewer_id = models.IntegerField(default=1)
     product = models.ForeignKey(Product, on_delete=models.CASCADE, related_name='reviews')
     slug = models.CharField(max_length=80, blank=False, null=False)
     rating = models.IntegerField(validators=[MinValueValidator(0), MaxValueValidator(5)])

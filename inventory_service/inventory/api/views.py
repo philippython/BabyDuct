@@ -52,7 +52,6 @@ class ReviewDeleteView(DestroyAPIView):
     lookup_field = "slug"
 
 
-
 class UserReviewsListView(ListAPIView):
     serializer_class = ReviewSerializers
     queryset = Review.objects.all()
