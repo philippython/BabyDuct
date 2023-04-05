@@ -1,10 +1,12 @@
 from accounts.models import *
 from .serializers import *
+from .permissions import *
 from .helper import *
 from drf_yasg import openapi
 from drf_yasg.utils import swagger_auto_schema
 from django.shortcuts import get_object_or_404
-from rest_framework.decorators import api_view
+from rest_framework.permissions import IsAuthenticated, AllowAny
+from rest_framework.decorators import api_view, permission_classes
 from rest_framework.response import Response
 from rest_framework.viewsets import ModelViewSet
 from rest_framework.status import HTTP_200_OK, HTTP_201_CREATED, HTTP_202_ACCEPTED, HTTP_400_BAD_REQUEST
@@ -44,6 +46,7 @@ from dj_rest_auth.social_serializers import TwitterLoginSerializer
                          404: openapi.Response('Not found')
                      })
 @api_view(['POST'])
+@permission_classes([AllowAny])
 def create_seller(request):
     if request.method == 'POST':
         serializer = SellerRegistrationSerializers(data=request.data)
@@ -78,6 +81,7 @@ def create_seller(request):
                          404: openapi.Response('Not found')
                      })
 @api_view(['POST'])
+@permission_classes([AllowAny])
 def create_buyer(request):
 
     if request.method == 'POST':
@@ -110,12 +114,13 @@ def create_buyer(request):
                          404: openapi.Response('Not found')
                      })
 @api_view(['POST',])
+@permission_classes([AllowAny])
 def user_login(request):
     if request.method== "POST":
         password = request.data["password"]
         data = {}
 
-        user = User.objects.get(email=request.data["email"])
+        user = get_object_or_404(User, email=request.data["email"])
         if user.check_password(password):
             token = Token.objects.get(user=user).key
             data["token"] = token
@@ -143,6 +148,21 @@ def logout_view(request):
         request.user.auth_token.delete()
         return Response(status=HTTP_200_OK)
 
+@api_view(['GET',])
+@permission_classes([AllowAny])
+def obtain_seller_data(request):
+    auth_token = request.headers.get('Authorization').split(" ")[1]
+    if auth_token:
+        token = Token.objects.get(key=auth_token)
+        user = User.objects.get(uuid=token.user.uuid)
+        print(user)
+        user_id = user.pk
+        if SellerProfile.objects.get(user=user_id) != None:
+            return Response({"seller_id": user_id, "seller_name": str(user)}, HTTP_200_OK)
+        else:
+            return Response({"error": "Only sellers can create product"}, 403)
+    else:
+        return Response({"error": "Invalid Authorization format"}, HTTP_400_BAD_REQUEST)
 # users account information view
 class UserAccountInformationView(ModelViewSet):
     queryset = User.objects.all()
@@ -154,21 +174,31 @@ class BuyerPaymentInformationView(ModelViewSet):
     queryset = BuyerPaymentInformation.objects.all()
     serializer_class = BuyerPaymentMethodSerializers
 
+    def get_permissions(self):
+        if self.action == 'list' or self.action == 'create':
+            permission_classes = [AllowAny]
+        else:
+            permission_classes = [IsAuthenticatedUser, IsAuthenticated]
+        return [permission() for permission in permission_classes]
+
+
     def list(self, request):
         return Response([])
     
-
     def retrieve(self, request, pk):
         user = get_object_or_404(BuyerPaymentInformation, pk=pk)
         serializer = BuyerPaymentMethodSerializers(user)
         response = {}
-        for key, data in serializer.data.items():
-            if key == "user" or key == "payment_method":
-                response[key] = data
-            else:
-                response[key] = char_decrypt(KEY, data)
-        return Response(response, HTTP_200_OK)
-        
+        if serializer.data["user"] == request.user.uuid:        
+            for key, data in serializer.data.items():
+                if key == "user" or key == "payment_method":
+                    response[key] = data
+                else:
+                    response[key] = char_decrypt(KEY, data)
+            return Response(response, HTTP_200_OK)
+        else:
+            return Response({"error": "You are not allowed to perform this action"})
+
 # buyers shippment address views
 class BuyerShipmentAddressCreateView(CreateAPIView):
     serializer_class = BuyerShipmentAddressSerializers

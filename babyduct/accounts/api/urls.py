@@ -11,6 +11,7 @@ urlpatterns = [
     # auth urls
     path('auth/register/seller', create_seller, name='register_seller'),
     path('auth/register/buyer', create_buyer, name='register_buyer'),
+    path('auth/obtain-seller-data', obtain_seller_data, name='obtain_seller_data'),
     path('auth/login', user_login, name="user_login"),
     path('auth/logout', logout_view, name="logout" ),
 

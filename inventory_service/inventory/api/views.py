@@ -1,5 +1,5 @@
+from .helper import *
 from rest_framework.generics import RetrieveAPIView, ListAPIView, CreateAPIView , UpdateAPIView, DestroyAPIView
-from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework.parsers import MultiPartParser, FormParser
 from django.shortcuts import get_object_or_404
@@ -10,6 +10,19 @@ class ProductCreateView(CreateAPIView):
     parser_class = [MultiPartParser, FormParser]
     serializer_class = ProductSerializers
 
+    def perform_create(self, serializer):
+        auth_header = self.request.headers.get("Authorization")
+        if auth_header != None:
+            response = get_seller_data(auth_header)
+            if response.status_code == 200 : 
+                uuid = response.json()["seller_id"]
+                seller = response.json()["seller_name"]
+                serializer.save(seller_id=uuid, seller=seller)
+            else : 
+                return Response(response.json(), response.status_code)
+        else:
+            return Response({"error": "No authentication credentials provided"})
+        
 class ProductListView(ListAPIView):
     serializer_class = ProductSerializers
     queryset = Product.objects.all()

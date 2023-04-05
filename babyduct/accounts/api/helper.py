@@ -22,3 +22,4 @@ def char_decrypt(key, string):
         else :
             cipher += letter
     return cipher
+

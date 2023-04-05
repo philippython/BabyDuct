@@ -6,7 +6,8 @@ from django.core.validators import MinValueValidator, MaxValueValidator
 
 # Create your models here.
 class Product(models.Model):
-    seller_id = models.IntegerField(default=1)
+    seller = models.CharField(max_length=255, default="product_owner")
+    seller_id = models.UUIDField()
     name = models.CharField(max_length=50, unique=True, blank=False)
     description = models.CharField(max_length=255, blank=False)
     slug = models.CharField(max_length=80, blank=False, null=False)
@@ -15,7 +16,7 @@ class Product(models.Model):
     date = models.DateField(auto_now_add=True)
 
     def get_absolute_url(self):
-        return reverse('single-product', kwargs={'slug' : self.slug})
+        return reverse('single_product', kwargs={'slug' : self.slug})
 
     def save(self, *args, **kwargs):
         self.slug = slugify(self.name)

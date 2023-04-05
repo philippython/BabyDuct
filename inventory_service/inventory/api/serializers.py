@@ -14,7 +14,8 @@ class ProductsImageSerializers(serializers.ModelSerializer):
         fields = "__all__"
 
 class ProductSerializers(serializers.ModelSerializer):
-    
+    seller = serializers.CharField(read_only=True)
+    seller_id = serializers.UUIDField(format='hex_verbose', read_only=True)
     url = serializers.CharField(source='get_absolute_url', read_only=True)
     reviews = ReviewSerializers(many=True, read_only=True)
     images =  ProductsImageSerializers(many=True, read_only=True)
@@ -25,7 +26,7 @@ class ProductSerializers(serializers.ModelSerializer):
 
     class Meta:
         model = Product
-        fields = ["id", "name","url", "description", "category", "price", "date", "images", "reviews", "uploaded_images"]
+        fields = ["id","seller_id", "seller", "name","url", "description", "category", "price", "date", "images", "reviews", "uploaded_images"]
 
     def create(self, validated_data):
         uploaded_images = validated_data.pop("uploaded_images")
