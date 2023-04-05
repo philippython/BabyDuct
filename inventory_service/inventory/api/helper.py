@@ -1,6 +1,6 @@
 import requests
 
-URL = "http://127.0.0.1:8000/api/v1/accounts/auth/obtain-seller-data"
+URL = "https://babyduct-inventory-service.onrender.com/api/v1/accounts/auth/obtain-seller-data"
 
 def get_seller_data(header):
     """ function to return authentication token or or custom error message"""
