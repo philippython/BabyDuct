@@ -4,6 +4,7 @@ from rest_framework.response import Response
 from rest_framework.parsers import MultiPartParser, FormParser
 from django.shortcuts import get_object_or_404
 from inventory.models import Product, Review
+from django_filters.rest_framework import DjangoFilterBackend
 from inventory.api.serializers import ProductSerializers, ReviewSerializers, ProductsImageSerializers
 
 class ProductCreateView(CreateAPIView):
@@ -25,6 +26,8 @@ class ProductCreateView(CreateAPIView):
         
 class ProductListView(ListAPIView):
     serializer_class = ProductSerializers
+    filter_backends = [DjangoFilterBackend]
+    filterset_fields = ['seller']
     queryset = Product.objects.all()
 
 class ProductDetailView(RetrieveAPIView):
