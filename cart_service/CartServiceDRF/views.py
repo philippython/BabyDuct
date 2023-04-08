@@ -1,14 +1,13 @@
-from django.shortcuts import render
 from rest_framework.decorators import api_view
 from rest_framework import generics,status
 from .serializer import CartSerializer,CartItemSerializer
 from rest_framework.response import Response
 from .models import Cart,CartItem
 import requests
-
-
+from .helper import *
 from rest_framework.authtoken.models import Token
-
+from rest_framework import permissions
+import os
 """
 buyer {
   "first_name": "chi",
@@ -24,6 +23,11 @@ buyer {
 """
 
 """
+
+[{"id":1,"seller_id":"613cb4ff-c570-40bc-be9f-d9b4cee82c5f","seller":"osionu",
+"name":"test product 2",
+"url":"/api/v1/inventory/products/test-product-2",
+"description":"test product
 seller {
   "first_name": "ste",
   "last_name": "onu",
@@ -39,51 +43,50 @@ seller {
   "response": "Registration successful"
 }
 """
-# Using custom user model
-def get_token(request):
-    # Get the user's token
-    token = Token.objects.get(user=request.user)
-    return token
-    #print(token)
 
-    # Use the token to authenticate with the external service
-    #headers = {
-        #'Authorization': f'Token {token.key}'
-    #}
-    # Get the user's UUID
-    #user_uuid = request.user.uuid
-    #print(user_uuid)
 
-    # Build the URL with the user's UUID
-    #url = f"https://babyduct-accounts-service.onrender.com/account-information/{user_uuid}"
-    #response = requests.get(url, headers=headers)
 
-    #if response.status_code != 200:
-    #    return "User not found"
-    # return response.json()
-class AddToCartView(generics.CreateAPIView):
-    queryset = Cart.objects.all()
+class CartCreateView(generics.CreateAPIView):
     serializer_class = CartSerializer
+    #permission_classes = [permissions.IsAuthenticatedOrReadOnly]
 
-    def create(self, request, *args, **kwargs):
-        user_id = request.user.id
-        slug = kwargs['slug']
-        header = {'Authorization': f'Token {get_token()}'}
-        response = requests.get(f"https://babyduct-inventory-service.onrender.com/products/{slug}", headers=header)
+    def perform_create(self,serializer):
+        #auth_header = self.request.headers.get("Authorization").split(" ")[1]
 
+        #auth_header = request.headers.get('Authorization').split(" ")[1]
+        #if auth_header is None:
+        #    return Response({"error": "No authentication credentials provided"})
+        breakpoint()
+        response = get_buyer_id()
+        print(response)
+        breakpoint()
         if response.status_code != 200:
-            return Response({'error': 'Product not found'}, status=status.HTTP_404_NOT_FOUND)
+            return Response(response.json(), response.status_code)
+        buyer_id = response.json()["buyer_id"]
+        breakpoint()
 
-        product_data = response.json()
+        slug = self.kwargs.get("slug")
+        if slug is None:
+            return Response({"error": "No slug provided"})
+        product_url = f"http://localhost:5500/api/v1/products/{slug}"
+        product_response = requests.get(product_url)        
+        if product_response.status_code != 200:
+            return Response(product_response.json(), product_response.status_code)
+        product_data = product_response.json()
 
-        cart, _ = Cart.objects.get_or_create(user_id=user_id)
-        cart_item, created = CartItem.objects.get_or_create(name=product_data['name'], price=product_data['price'], cart=cart)
+        cart = Cart.objects.filter(user_id=buyer_id).first()
+        if cart is None:
+            cart = Cart.objects.create(user_id=buyer_id)
 
-        if not created:
-            cart_item.quantity += 1
-            cart_item.save()
+        CartItem.objects.create(
+            cart=cart,
+            product_id=product_data["id"],
+            name=product_data["name"],
+            price=product_data["price"],
+            quantity=1
+        )
 
-        serializer = CartItemSerializer(cart_item)
+        serializer.instance = cart
         return Response(serializer.data, status=status.HTTP_201_CREATED)
 
 class CartItemDeleteView(generics.DestroyAPIView):
@@ -97,4 +100,3 @@ class CartItemUpdateView(generics.UpdateAPIView):
 class CartItemRetrieveView(generics.RetrieveAPIView):
     queryset = CartItem.objects.all()
     serializer_class = CartItemSerializer
-

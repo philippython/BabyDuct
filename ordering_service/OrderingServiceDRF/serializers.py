@@ -4,4 +4,4 @@ from .models import Orders
 class OrderingServiceSerializer(serializers.ModelSerializer):
     class Meta:
         model = Orders
-        fields = ("product_name","address","price","date_created","price","status")
+        fields = ["product_name","address","price","date_created","price","status"]

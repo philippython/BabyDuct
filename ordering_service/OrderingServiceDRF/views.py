@@ -22,7 +22,6 @@ class OrderingServiceDeleteView(generics.DestroyAPIView):
     queryset = Orders.objects.all()
     serializer_class = OrderingServiceSerializer
 
-
 class OrderingServiceListView(generics.ListAPIView):
     queryset = Orders.objects.all()
     serializer_class = OrderingServiceSerializer

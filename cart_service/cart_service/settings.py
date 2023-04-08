@@ -28,7 +28,7 @@ INSTALLED_APPS = [
     'rest_framework',
     'CartServiceDRF',
     'corsheaders',
-    "drf_spectacular",
+    #"drf_spectacular",
 ]
 
 MIDDLEWARE = [
@@ -93,7 +93,7 @@ AUTH_PASSWORD_VALIDATORS = [
 ]
 REST_FRAMEWORK = {
 "DEFAULT_PERMISSION_CLASSES": [
-"rest_framework.permissions.IsAuthenticated",
+#"rest_framework.permissions.IsAuthenticated",
 ],
 "DEFAULT_SCHEMA_CLASS": "drf_spectacular.openapi.AutoSchema", # new
 }

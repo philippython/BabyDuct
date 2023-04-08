@@ -20,7 +20,7 @@ class CartItem(models.Model):
 from django.db import models
 
 class Cart(models.Model):
-    user_id = models.IntegerField()
+    user_id = models.CharField(max_length=500)
     product_id = models.IntegerField()
     created_at = models.DateField(auto_now=True)
 
