@@ -12,8 +12,10 @@ urlpatterns = [
     path('auth/register/seller', create_seller, name='register_seller'),
     path('auth/register/buyer', create_buyer, name='register_buyer'),
     path('auth/obtain-seller-data', obtain_seller_data, name='obtain_seller_data'),
+    path('auth/obtain-buyer-id', obtain_buyer_id, name='obtain_buyer_id'),
     path('auth/login', user_login, name="user_login"),
     path('auth/logout', logout_view, name="logout" ),
+
 
     # buyer shipment address endpoint
     path('buyer/create-shipment', BuyerShipmentAddressCreateView.as_view(), name='create_buyer_shipment'),

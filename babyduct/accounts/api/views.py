@@ -163,6 +163,21 @@ def obtain_seller_data(request):
             return Response({"error": "Only sellers can create product"}, 403)
     else:
         return Response({"error": "Invalid Authorization format"}, HTTP_400_BAD_REQUEST)
+
+#obtain buyers data
+@api_view(['GET'])
+@permission_classes([AllowAny])
+def obtain_buyer_id(request):
+    auth_token = request.headers.get('Authorization').split(" ")[1]
+    if auth_token:
+        token = Token.objects.get(key=auth_token)
+        user = User.objects.get(uuid=token.user.uuid)
+        user_id = user.pk
+        return Response({"buyer_id": user_id,}, HTTP_200_OK)
+    else:
+        return Response({"error": "Invalid Authorization format"}, HTTP_400_BAD_REQUEST)
+
+
 # users account information view
 class UserAccountInformationView(ModelViewSet):
     queryset = User.objects.all()
