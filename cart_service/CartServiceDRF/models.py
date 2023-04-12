@@ -1,21 +1,4 @@
 from django.db import models
-import requests
-"""
-class Cart(models.Model):
-    user_id = models.IntegerField()
-    product_id = models.IntegerField() 
-    created_at = models.DateField(auto_now=True)
-    
-
-class CartItem(models.Model):
-    quantity = models.PositiveIntegerField(default=1)
-    price = models.PositiveIntegerField()
-    name = models.CharField(max_length=255)
-    cart = models.ForeignKey(Cart,on_delete=models.CASCADE)
-    created_at = models.DateField(auto_now_add=True)
-    updated_at  = models.DateField(auto_now=True)
-
-"""
 
 from django.db import models
 

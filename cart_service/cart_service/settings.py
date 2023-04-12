@@ -28,7 +28,8 @@ INSTALLED_APPS = [
     'rest_framework',
     'CartServiceDRF',
     'corsheaders',
-    #"drf_spectacular",
+    #'django.contrib.staticfiles',  
+    'drf_yasg',
 ]
 
 MIDDLEWARE = [
@@ -91,19 +92,9 @@ AUTH_PASSWORD_VALIDATORS = [
         'NAME': 'django.contrib.auth.password_validation.NumericPasswordValidator',
     },
 ]
-REST_FRAMEWORK = {
-"DEFAULT_PERMISSION_CLASSES": [
-#"rest_framework.permissions.IsAuthenticated",
-],
-"DEFAULT_SCHEMA_CLASS": "drf_spectacular.openapi.AutoSchema", # new
-}
 
-SPECTACULAR_SETTINGS = {
-"TITLE": "Cart Service",
-"DESCRIPTION": "Cart Service Endpoints",
-"VERSION": "1.0.0",
-# OTHER SETTINGS
-}
+
+
 # Internationalization
 # https://docs.djangoproject.com/en/4.1/topics/i18n/
 
