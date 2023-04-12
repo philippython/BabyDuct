@@ -10,11 +10,3 @@ def get_buyer_id(header):
         }
         return requests.get(URL, headers=headers)
     
-
-def get_products_data(slug):
-    if slug == None:
-        return "slug is required"
-    else:
-        return requests.get("https://babyduct-inventory-service.onrender.com/api/v1/inventory/products/{slug}")
-
-

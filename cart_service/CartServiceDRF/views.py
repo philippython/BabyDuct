@@ -55,7 +55,8 @@ class CartCreateView(generics.CreateAPIView):
         auth_header = self.request.headers.get("Authorization")       
         response = get_buyer_id(auth_header)      
         buyer_id = response.json()["buyer_id"]
-        product_response = requests.get("https://babyduct-inventory-service.onrender.com/api/v1/inventory/products/{slug}")
+        slug = self.request.headers.get("slug")
+        product_response = requests.get(f"https://babyduct-inventory-service.onrender.com/api/v1/inventory/products/{slug}")
         product_data = product_response.json()
         product_id = product_data["id"]
         product_price = product_data["price"]
