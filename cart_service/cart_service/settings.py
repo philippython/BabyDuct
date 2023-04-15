@@ -1,15 +1,12 @@
 from pathlib import Path
-from dotenv import load_dotenv
 import os
-
-
+import dj_database_url
+import environ
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
-
-
-#load_dotenv(BASE_DIR / '.env')
-
+env = environ.Env()
+environ.Env.read_env()
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/4.1/howto/deployment/checklist/
@@ -21,14 +18,7 @@ SECRET_KEY = 'django-insecure-x--_br$*$h4$w_q8_!vqwu+y+%omd=nk!px%k*^j7q6c6ij%z$
 DEBUG = True
 
 ALLOWED_HOSTS = []
-"""
-SECRET_KEY = os.getenv('SECRET_KEY')
 
-# SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = os.getenv('DEBUG', '0').lower() in ['true', 't', '1']
-
-ALLOWED_HOSTS = os.getenv('ALLOWED_HOSTS').split(' ')
-"""
 
 # Application definition
 
@@ -41,8 +31,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'rest_framework',
     'CartServiceDRF',
-    'corsheaders',
-    #'django.contrib.staticfiles',  
+    'corsheaders',  
     'drf_yasg',
 ]
 
@@ -80,14 +69,18 @@ WSGI_APPLICATION = 'cart_service.wsgi.application'
 
 # Database
 # https://docs.djangoproject.com/en/4.1/ref/settings/#databases
-
+"""
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3',
         'NAME': BASE_DIR / 'db.sqlite3',
     }
 }
-
+"""  
+#POstgres production daabase
+DATABASES   = {
+       'default':dj_database_url.parse(env('DATABASE_URL'))
+}
 
 # Password validation
 # https://docs.djangoproject.com/en/4.1/ref/settings/#auth-password-validators
