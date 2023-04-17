@@ -20,12 +20,12 @@ django-environ==0.10.0
 django-rest-auth==0.9.5
 django-toolbelt==0.0.1
 djangorestframework==3.13.1
+drf-spectacular==0.26.1
 drf-yasg==1.21.5
 elasticsearch==7.17.9
 elasticsearch-dsl==7.4.1
 greenlet==2.0.2
 gunicorn==20.1.0
-swagger-ui-bundle==0.0.9
 idna==3.4
 inflection==0.5.1
 iniconfig==2.0.0
@@ -63,3 +63,4 @@ tzdata==2022.7
 uritemplate==4.1.1
 uritemplate.py==3.0.2
 urllib3==1.26.15
+whitenoise==6.4.0
