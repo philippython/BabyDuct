@@ -124,6 +124,7 @@ def user_login(request):
         if user.check_password(password):
             token = Token.objects.get(user=user).key
             data["token"] = token
+            data["uuid"] = user.uuid
             data["response"] = "Login successful, User Authenticated!"
             return Response(data, HTTP_202_ACCEPTED)
         else:
@@ -149,13 +150,12 @@ def logout_view(request):
         return Response(status=HTTP_200_OK)
 
 @api_view(['GET',])
-@permission_classes([AllowAny])
+@permission_classes([IsAuthenticated])
 def obtain_seller_data(request):
     auth_token = request.headers.get('Authorization').split(" ")[1]
     if auth_token:
         token = Token.objects.get(key=auth_token)
         user = User.objects.get(uuid=token.user.uuid)
-        print(user)
         user_id = user.pk
         if SellerProfile.objects.get(user=user_id) != None:
             return Response({"seller_id": user_id, "seller_name": str(user)}, HTTP_200_OK)
@@ -163,8 +163,10 @@ def obtain_seller_data(request):
             return Response({"error": "Only sellers can create product"}, 403)
     else:
         return Response({"error": "Invalid Authorization format"}, HTTP_400_BAD_REQUEST)
+
 # users account information view
 class UserAccountInformationView(ModelViewSet):
+    permission_classes = [IsAuthenticatedUser]
     queryset = User.objects.all()
     serializer_class = UsersAccountInformationSerializers
 
@@ -237,6 +239,7 @@ class SellerListAPIView(ListAPIView):
 
 
 class SellerProfileView(RetrieveAPIView):
+    permission_classes = [IsAuthenticatedUser]
     serializer_class = SellerProfileSerializers
 
     def get(self, request, uuid):
@@ -246,11 +249,13 @@ class SellerProfileView(RetrieveAPIView):
         return Response(serializer.data, 200)
 
 class SellerProfileUpdateView(UpdateAPIView):
+    permission_classes = [IsAuthenticatedUser]
     serializer_class = SellerProfileSerializers
     queryset = SellerProfile.objects.all()
     lookup_field = "user"
 
 class SellerProfileDeleteView(DestroyAPIView):
+    permission_classes = [IsAuthenticatedUser]
     serializer_class = SellerProfileSerializers
     queryset = SellerProfile.objects.all()
     lookup_field = "user"

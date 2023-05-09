@@ -24,7 +24,6 @@ class BuyerPaymentInformation(models.Model):
             raise ValidationError({"Invalid expiry date"}, 400)
 
 
-        
     user = models.OneToOneField(User, on_delete=models.CASCADE)    
     card_name = models.CharField(max_length=55, null=False)
     card_number = models.CharField(max_length=16,validators=[MinLengthValidator(11)], null=False)
