@@ -1,59 +1,61 @@
 from django.shortcuts import render
-import requests
-from rest_framework import generics
+from rest_framework import generics,status
 from .models import Orders
+import requests
 from .serializers import OrderingServiceSerializer
 from rest_framework.decorators import api_view,renderer_classes
 from rest_framework.response import Response
+from .helper import *
+
 
 class OrderingServiceCreateView(generics.CreateAPIView):
-    queryset = Orders.objects.all()
     serializer_class = OrderingServiceSerializer
 
+    def perform_create(self, serializer):  
+        auth_header = self.request.headers.get("Authorization")   
+        response = get_buyer_id(auth_header)
+        buyer_id = response.json()["buyer_id"]
+        id = self.request.headers.get("id")
+        cart_response = requests.get(f"https://babyduct-cart-service.onrender.com/api/v1/cart-item/{id}/retrieve")
+        cart = cart_response.json()
+        print(cart)
+        cart_id = cart["id"]
+        product_name = cart["name"]
+        product_price = cart["price"]
+        uuid = self.request.headers.get("uuid")
+        print(uuid)
+        shipping_information_response = requests.get(f"https://babyduct-accounts-service.onrender.com/api/v1/accounts/buyer/shipment/{uuid}")
+        print(shipping_information_response)
+        shipping_information  = shipping_information_response.json()
+        cart = serializer.save(user_id=buyer_id,cart_id=cart_id,product_name=product_name,price=product_price,country=shipping_information["country"],state=shipping_information["state"],city=shipping_information["city"],street=shipping_information["street"])
+        return Response(serializer.data, status=status.HTTP_201_CREATED)
+
+        
 class OrderingServiceSingleView(generics.RetrieveAPIView):
     queryset = Orders.objects.all()
     serializer_class = OrderingServiceSerializer
 
-class OrderingServiceUpdateView(generics.UpdateAPIView):
+class OrderUpdateView(generics.UpdateAPIView):
     queryset = Orders.objects.all()
     serializer_class = OrderingServiceSerializer
+
+    def put(self, request, *args, **kwargs):
+        instance = self.get_object()
+        if request.data['status'] in ['completed', 'cancelled']:
+            instance.status = request.data['status']
+            instance.save()
+            serializer = self.get_serializer(instance)
+            return Response(serializer.data)
+        else:
+            return Response({"status": "Invalid status value. Valid values are 'completed' or 'cancelled'."})
 
 class OrderingServiceDeleteView(generics.DestroyAPIView):
     queryset = Orders.objects.all()
     serializer_class = OrderingServiceSerializer
+    
+    
 
 class OrderingServiceListView(generics.ListAPIView):
     queryset = Orders.objects.all()
     serializer_class = OrderingServiceSerializer
 
-@api_view(['GET','POST'])
-def completed_order(request,pk):
-    complete = Orders.objects.all()
-"""
-def order_tracker(request):
-    if request.method=="POST":
-        orderId = request.POST.get('orderId', '')
-        try:
-            order= Order.objects.filter(pk=orderId)
-
-            if len(order)>0:
-                update = Order.objects.filter(pk=orderId)
-                updates = []
-                for order in update:
-                    order.status = 'Scheduled'
-                    order.save()
-                    updates.append({'status' : order.status})
-                    response = json.dumps(updates)
-                    return HttpResponse(response)
-            else:
-                return HttpResponse('{}')
-        except Exception as e:
-            return HttpResponse('{}')
-    return render(request,"tracker.html")
-if the payment status is pending. And then fetch the orders object to get the pending objects
-
-Orders.objects.filter(status=Orders.PENDING)
-Once you iterate through this queryset you can hit payment_status_check request for a particular id and update the status again through
-
-status=Orders.SUCCESS
-"""
