@@ -17,7 +17,7 @@ class Orders(models.Model):
     city = models.CharField(max_length=255)
     street = models.CharField(max_length=255)
     price = models.DecimalField(max_digits=8,decimal_places=2)
-    status = models.CharField(max_length=50,choices=ORDER_STATUS,default ='1') 
+    status = models.CharField(max_length=50,choices=ORDER_STATUS,default ='pending') 
     date_created = models.DateTimeField(auto_now_add=True)
     date_updated = models.DateTimeField(auto_now=True)   
 
