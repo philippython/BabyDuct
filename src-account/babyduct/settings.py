@@ -27,7 +27,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = os.environ.get("SECRET_KEY", "jgfugygiyiouijpkumgftfghiho")
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
 ALLOWED_HOSTS = ["*"]
 
@@ -110,11 +110,10 @@ WSGI_APPLICATION = 'babyduct.wsgi.application'
 # https://docs.djangoproject.com/en/4.0/ref/settings/#databases
 
 DATABASES = {
-    'default': dj_database_url.parse("postgres://accounts_sevice_db_user:hlNqtKi0pOS7bRNZXs0HHEyIyjYfcauL@dpg-cfk34m5a49903fmb26kg-a.oregon-postgres.render.com/accounts_sevice_db")
-    # 'default': {
-    #         'ENGINE': 'django.db.backends.sqlite3',
-    #         'NAME': BASE_DIR / 'db.sqlite3',
-    #     }
+    'default': {
+            'ENGINE': 'django.db.backends.sqlite3',
+            'NAME': BASE_DIR / 'db.sqlite3',
+        }
 }
 
 # Password validation

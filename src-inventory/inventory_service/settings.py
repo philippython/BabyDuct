@@ -26,7 +26,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # SECURITY WARNING: keep the secret key used in production secret!
 SECRET_KEY = "r7g5vighgfuiehduicjvgotkybmtr"
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
 ALLOWED_HOSTS = ["*"]
 
@@ -82,11 +82,10 @@ WSGI_APPLICATION = 'inventory_service.wsgi.application'
 # https://docs.djangoproject.com/en/4.0/ref/settings/#databases
 
 DATABASES = {
-    'default' : dj_database_url.parse("postgres://babyduct_inventor_servicedb_user:4vMhvNOQoBtqaH4YNaBn9KTE6MjbBXh8@dpg-cgmc3ljhp8ua8vpbhm2g-a.oregon-postgres.render.com/babyduct_inventor_servicedb")
-    # 'default': {
-    #     'ENGINE': 'django.db.backends.sqlite3',
-    #     'NAME': BASE_DIR / 'db.sqlite3',
-    # }
+    'default': {
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': BASE_DIR / 'db.sqlite3',
+    }
 }
 
 
