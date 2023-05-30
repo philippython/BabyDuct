@@ -149,6 +149,19 @@ def logout_view(request):
         request.user.auth_token.delete()
         return Response(status=HTTP_200_OK)
 
+@api_view(['GET'])
+@permission_classes([AllowAny])
+def obtain_buyer_id(request):
+    auth_token = request.headers.get('Authorization').split(" ")[1]
+    if auth_token:
+        token = Token.objects.get(key=auth_token)
+        user = User.objects.get(uuid=token.user.uuid)
+        user_id = user.pk
+        return Response({"buyer_id": user_id,}, HTTP_200_OK)
+    else:
+        return Response({"error": "Invalid Authorization format"}, HTTP_400_BAD_REQUEST)
+      
+      
 @api_view(['GET',])
 @permission_classes([IsAuthenticated])
 def obtain_seller_data(request):
