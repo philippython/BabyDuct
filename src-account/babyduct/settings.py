@@ -110,10 +110,14 @@ WSGI_APPLICATION = 'babyduct.wsgi.application'
 # https://docs.djangoproject.com/en/4.0/ref/settings/#databases
 
 DATABASES = {
-    'default': {
-            'ENGINE': 'django.db.backends.sqlite3',
-            'NAME': BASE_DIR / 'db.sqlite3',
-        }
+    "default": {
+        "ENGINE": "django.db.backends.postgresql",
+        "NAME": "account_serviceDB",
+        "USER": "philip",
+        "PASSWORD": "mysuperuser",
+        "HOST": "account-service-db.clmta3lxly1y.eu-north-1.rds.amazonaws.com",
+        "PORT": "5432",
+    }
 }
 
 # Password validation
