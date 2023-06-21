@@ -27,7 +27,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = os.environ.get("SECRET_KEY", "jgfugygiyiouijpkumgftfghiho")
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
 ALLOWED_HOSTS = ["*"]
 
@@ -112,10 +112,10 @@ WSGI_APPLICATION = 'babyduct.wsgi.application'
 DATABASES = {
     "default": {
         "ENGINE": "django.db.backends.postgresql",
-        "NAME": "account_serviceDB",
-        "USER": "philip",
-        "PASSWORD": "mysuperuser",
-        "HOST": "account-service-db.clmta3lxly1y.eu-north-1.rds.amazonaws.com",
+        "NAME": os.getenv("AWS_RDS_DB_NAME"),
+        "USER": os.getenv("AWS_RDS_USER"),
+        "PASSWORD": os.getenv("AWS_RDS_PASSWORD"),
+        "HOST": os.getenv("AWS_RDS_DB_HOST"),
         "PORT": "5432",
     }
 }
@@ -191,5 +191,14 @@ REST_FRAMEWORK = {
                    'DEFAULT_PERMISSION_CLASSES': [
                         'rest_framework.permissions.IsAuthenticated'
                    ]
-                }
+}
 
+AWS_ACCESS_KEY_ID = os.getenv("AWS_ACCESS_KEY_ID")
+AWS_SECRET_ACCESS_KEY = os.getenv("AWS_SECRET_ACCESS_KEY")
+AWS_STORAGE_BUCKET_NAME = os.getenv("AWS_STORAGE_BUCKET_NAME")
+AWS_S3_REGION_NAME = 'eu-north-1'
+AWS_DEFAULT_ACL = None 
+AWS_S3_SIGNATURE_NAME = 's3v4'
+AWS_S3_FILE_OVERWRITE = False
+AWS_S3_VERITY = True
+DEFAULT_FILE_STORAGE = "storages.backends.s3boto3.S3Boto3Storage"
